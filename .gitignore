@@ -39,3 +39,10 @@ Thumbs.db
 # Temporary files
 *.tmp
 *~
+.env.backend
+.env.*
+!.env.example
+*.log
+backend-test.log
+vite-test.log
+vite-err.log
