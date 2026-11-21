@@ -162,6 +162,7 @@ export default function Hero() {
     let shown = 0
     let raf = 0
     let capCache = 0
+    let lastFrameTs = performance.now()
 
     const getCapRatio = () => {
       if (capCache) return capCache
@@ -235,15 +236,18 @@ export default function Hero() {
       if (!raf) raf = requestAnimationFrame(frame)
     }
 
-    const frame = () => {
+    const frame = (now = performance.now()) => {
       raf = 0
+      const dt = Math.min(Math.max((now - lastFrameTs) / 1000, 0.004), 0.05)
+      lastFrameTs = now
       const vh = window.innerHeight
       const vw = window.innerWidth
       const r = sec.getBoundingClientRect()
       const span = Math.max(1, sec.offsetHeight - vh)
       const target = clamp01(-r.top / span)
 
-      shown += (target - shown) * 0.16
+      const lerpK = 1 - Math.pow(1 - 0.16, Math.max(dt * 60, 0.5))
+      shown += (target - shown) * lerpK
       if (Math.abs(target - shown) < 0.0004) {
         shown = target
       } else {
@@ -299,6 +303,7 @@ export default function Hero() {
       sec.style.setProperty('--hi', hiOpacity.toFixed(3))
       sec.style.setProperty('--io', io.toFixed(3))
       sec.style.setProperty('--iy', `${(-p * 26 * vh / 100).toFixed(1)}px`)
+      sec.style.setProperty('--h', h.toFixed(3))
       sec.style.setProperty('--co', co.toFixed(3))
       sec.style.setProperty('--cy', `${cyHero.toFixed(1)}px`)
       sec.style.setProperty('--cs', csHero.toFixed(4))
@@ -373,12 +378,43 @@ export default function Hero() {
       )}
 
       <div className="fh-stage">
-        {/* Sunrise Orange Sky + Background Clouds */}
+        {/* Sunrise Sky + Photographic CC0 Cumulus Layers */}
         <div className="fh-scene" aria-hidden="true">
           <div className="fh-sunrise-orb" />
-          <div className="fh-cloud fh-cloud-far" />
-          <div className="fh-cloud fh-cloud-mid" />
-          <div className="fh-spotlight-clouds" />
+          <img
+            className="fh-sky-cloud fh-cloud-far"
+            src="/img/sky/cloud-far.webp"
+            width="2000"
+            height="440"
+            alt=""
+            decoding="async"
+          />
+          <img
+            className="fh-sky-cloud fh-cloud-mid"
+            src="/img/sky/cloud-mid.webp"
+            width="2400"
+            height="680"
+            alt=""
+            decoding="async"
+          />
+          <div className="fh-spotlight-clouds">
+            <img
+              className="fh-spot-cloud fh-spot-cloud-a"
+              src="/img/sky/cloud-mid.webp"
+              width="2400"
+              height="680"
+              alt=""
+              decoding="async"
+            />
+            <img
+              className="fh-spot-cloud fh-spot-cloud-b"
+              src="/img/sky/cloud-front.webp"
+              width="1800"
+              height="760"
+              alt=""
+              decoding="async"
+            />
+          </div>
         </div>
 
         {/* Dedicated 3D Companion Robot Layer */}
@@ -389,9 +425,32 @@ export default function Hero() {
         {/* Foreground Cloud Curtains Splitting Left & Right (z-[5]) */}
         {flightEnabled && (
           <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden" aria-hidden="true">
-            <div className="fh-cloud fh-cloud-veil-l" />
-            <div className="fh-cloud fh-cloud-veil-r" />
-            <div className="fh-cloud fh-cloud-near" />
+            <div className="fh-cloud-veil fh-cloud-veil-l">
+              <img
+                src="/img/sky/cloud-bank.webp"
+                width="1600"
+                height="760"
+                alt=""
+                decoding="async"
+              />
+            </div>
+            <div className="fh-cloud-veil fh-cloud-veil-r">
+              <img
+                src="/img/sky/cloud-bank.webp"
+                width="1600"
+                height="760"
+                alt=""
+                decoding="async"
+              />
+            </div>
+            <img
+              className="fh-sky-cloud fh-cloud-near"
+              src="/img/sky/cloud-front.webp"
+              width="1800"
+              height="760"
+              alt=""
+              decoding="async"
+            />
           </div>
         )}
 
@@ -471,7 +530,7 @@ export default function Hero() {
         >
           <div className="container-brutalist w-full pt-20 pb-4 flex-1 flex flex-col justify-center">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-              <div className="lg:col-span-7 space-y-4 text-left">
+              <div className="lg:col-span-7 space-y-4 text-left fh-hero-copy">
                 <div className="inline-flex flex-wrap items-center gap-2">
                   <Badge variant="pink">ENGINE v2.4 READY</Badge>
                   <span className="font-mono text-[11px] font-bold text-brand-mint px-2.5 py-1 rounded-md bg-brand-mint/10 border border-brand-mint/35 backdrop-blur-md">
@@ -538,34 +597,34 @@ export default function Hero() {
               </div>
             </div>
 
-            <ul className="fh-strip-glass mt-6 grid grid-cols-2 md:grid-cols-4 rounded-2xl border border-white/15 bg-[#121621]/60 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] overflow-hidden divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <ul className="fh-strip-glass mt-6 grid grid-cols-2 md:grid-cols-4 rounded-2xl border border-white/15 bg-[#0B0E17]/85 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] overflow-hidden divide-y md:divide-y-0 md:divide-x divide-white/10">
               <li className="px-4 py-3">
-                <p className="font-mono text-[10px] text-gray-400 uppercase">Waktu Kirim</p>
+                <p className="font-mono text-[10px] text-[#CBD3E1] uppercase">Waktu Kirim</p>
                 <p className="font-mono font-bold text-lg sm:text-xl text-brand-mint mt-0.5">
                   <AnimatedMetric mode="seconds" active={metricsActive} />
                 </p>
-                <p className="text-[11px] text-gray-400">Sejak callback lunas</p>
+                <p className="text-[11px] text-[#A8B0C2]">Sejak callback lunas</p>
               </li>
               <li className="px-4 py-3">
-                <p className="font-mono text-[10px] text-gray-400 uppercase">Enkripsi Vault</p>
+                <p className="font-mono text-[10px] text-[#CBD3E1] uppercase">Enkripsi Vault</p>
                 <p className="font-mono font-bold text-lg sm:text-xl text-[#FFF9FA] mt-0.5">
                   AES-256
                 </p>
-                <p className="text-[11px] text-gray-400">Token &amp; stok GCM</p>
+                <p className="text-[11px] text-[#A8B0C2]">Token &amp; stok GCM</p>
               </li>
               <li className="px-4 py-3">
-                <p className="font-mono text-[10px] text-gray-400 uppercase">Pembayaran</p>
+                <p className="font-mono text-[10px] text-[#CBD3E1] uppercase">Pembayaran</p>
                 <p className="font-mono font-bold text-lg sm:text-xl text-brand-pink mt-0.5">
                   QRIS &amp; Bank
                 </p>
-                <p className="text-[11px] text-gray-400">Midtrans + Mutasi</p>
+                <p className="text-[11px] text-[#A8B0C2]">Midtrans + Mutasi</p>
               </li>
               <li className="px-4 py-3">
-                <p className="font-mono text-[10px] text-gray-400 uppercase">Kepemilikan</p>
+                <p className="font-mono text-[10px] text-[#CBD3E1] uppercase">Kepemilikan</p>
                 <p className="font-mono font-bold text-lg sm:text-xl text-brand-amber mt-0.5">
                   <AnimatedMetric mode="percent" active={metricsActive} />
                 </p>
-                <p className="text-[11px] text-gray-400">Cloud atau Source Code</p>
+                <p className="text-[11px] text-[#A8B0C2]">Cloud atau Source Code</p>
               </li>
             </ul>
           </div>
@@ -617,7 +676,7 @@ export default function Hero() {
               {/* Left 7 cols: Module 01 + Bottom Row (03, 04, 05) */}
               <div className="lg:col-span-7 flex flex-col gap-3">
                 {/* 01 / ATOMIC STOCK LOCK & AUTO-DELIVERY */}
-                <div className="rounded-2xl bg-[#101420]/74 backdrop-blur-xl border border-white/[0.15] shadow-[0_18px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.14)] p-4 sm:p-5 space-y-2.5">
+                <div className="rounded-2xl bg-[#0C101B]/85 backdrop-blur-xl border border-white/[0.15] shadow-[0_18px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.14)] p-4 sm:p-5 space-y-2.5">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="font-mono text-[11px] font-semibold uppercase text-[#F4F6FA] flex items-center gap-2">
                       <Zap className="w-4 h-4 text-[#FF9E4F]" />
@@ -653,7 +712,7 @@ export default function Hero() {
 
                 {/* Bottom 3-Card Row: 03, 04, 05 */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 flex-1">
-                  <div className="rounded-2xl bg-[#101420]/70 backdrop-blur-xl border border-white/[0.13] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] p-3.5 space-y-1.5 flex flex-col justify-between">
+                  <div className="rounded-2xl bg-[#0C101B]/85 backdrop-blur-xl border border-white/[0.13] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] p-3.5 space-y-1.5 flex flex-col justify-between">
                     <div className="space-y-1">
                       <span className="font-mono text-[10px] font-semibold uppercase text-[#38BDF8] flex items-center gap-1.5">
                         <CreditCard className="w-3.5 h-3.5 shrink-0" />
@@ -668,7 +727,7 @@ export default function Hero() {
                     </p>
                   </div>
 
-                  <div className="rounded-2xl bg-[#101420]/70 backdrop-blur-xl border border-white/[0.13] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] p-3.5 space-y-1.5 flex flex-col justify-between">
+                  <div className="rounded-2xl bg-[#0C101B]/85 backdrop-blur-xl border border-white/[0.13] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] p-3.5 space-y-1.5 flex flex-col justify-between">
                     <div className="space-y-1">
                       <span className="font-mono text-[10px] font-semibold uppercase text-brand-pink flex items-center gap-1.5">
                         <Database className="w-3.5 h-3.5 shrink-0" />
@@ -683,7 +742,7 @@ export default function Hero() {
                     </p>
                   </div>
 
-                  <div className="rounded-2xl bg-[#101420]/70 backdrop-blur-xl border border-white/[0.13] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] p-3.5 space-y-1.5 flex flex-col justify-between">
+                  <div className="rounded-2xl bg-[#0C101B]/85 backdrop-blur-xl border border-white/[0.13] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] p-3.5 space-y-1.5 flex flex-col justify-between">
                     <div className="space-y-1">
                       <span className="font-mono text-[10px] font-semibold uppercase text-[#FF9E4F] flex items-center gap-1.5">
                         <Code2 className="w-3.5 h-3.5 shrink-0" />
@@ -710,7 +769,7 @@ export default function Hero() {
 
               {/* Right 5 cols: Module 02 / CRYPTO VAULT Live Scrambler */}
               <div className="lg:col-span-5">
-                <div className="rounded-2xl bg-[#101420]/78 backdrop-blur-xl border border-white/[0.16] shadow-[0_18px_50px_rgba(0,0,0,0.52),inset_0_1px_0_rgba(255,255,255,0.15)] p-4 sm:p-5 h-full flex flex-col justify-between space-y-3">
+                <div className="rounded-2xl bg-[#0C101B]/85 backdrop-blur-xl border border-white/[0.16] shadow-[0_18px_50px_rgba(0,0,0,0.52),inset_0_1px_0_rgba(255,255,255,0.15)] p-4 sm:p-5 h-full flex flex-col justify-between space-y-3">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-mono text-[11px] font-semibold uppercase text-brand-mint flex items-center gap-1.5">

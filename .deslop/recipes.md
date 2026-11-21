@@ -418,3 +418,38 @@ Memperbaiki latar belakang yang polos karena tirai awan lama memudar ke `opacity
 - [ ] `AUTOBOTZ LIVE INFRASTRUCTURE` hilang total; digantikan `ARSITEKTUR & KEAMANAN` (4 modul lengkap) di Beat 3 tanpa duplikasi section di bawahnya.
 - [ ] Robot duduk menempel persis di bibir atas tombol `Sewa Bot Cloud` dengan kaki menggantung ke depan, tangan menumpu, dan *contact shadow* terlihat jelas.
 - [ ] Kabut awan terlihat nyata di belakang & sekitar robot (tidak polos) pada semua beat (`0%`, `Say Hi`, `Hero`, dan `Arsitektur & Keamanan`), dengan `0` error konsol/WebGL.
+
+
+---
+
+## 8. Upgrade Kualitas Awan: Dari Gumpalan Radial/SVG Blur ke Awan Detail Berlapis Ala FluxCode (2026-11-21)
+
+### A. Diagnosis Kenapa Awan Saat Ini Terlihat "Seperti Generate AI / Artifisial"
+1. **22 `THREE.Sprite` identik `256×256` (`IndustrialRobots3D.jsx`):** Memakai tumpukan lingkaran *radial gradient* yang diulang-ulang — mata langsung membaca pola "bola kapas *airbrush*" seragam tanpa tepi berserat (*wispy edges*).
+2. **Kurva SVG gelombang + `filter: blur(6px–8px)` (`index.css`):** `.fh-cloud-far`, `.fh-cloud-mid`, `.fh-cloud-near` hanyalah kurva bukit halus yang di-blur, sehingga tampak plastik/kartun.
+3. **Bandingkan dengan FluxCode (`fluxcode.muaraai.com`):** FluxCode tidak memakai SVG blur atau sprite lingkaran; ia memakai **3 lapis raster awan transparan beresolusi tinggi dengan detail tepi tajam (`filter: none`)**:
+   - `cloud-far` (`2000×360`) — awan tinggi (*cirrus/stratus*) tipis di horizon.
+   - `cloud-mid` (`2400×560`) — punggung awan kumulus berdetail mikro, puncak terang kena cahaya matahari, dasar bayangan gelap dingin.
+   - `cloud-front` (`1500×820`) — bank awan depan padat yang juga dipakai untuk `.cloud-bank.l` dan `.cloud-bank.r` (dicerminkan `scaleX(-1)`) agar membelah kiri–kanan secara alami.
+
+### B. Spesifikasi Visual Awan Baru (Detail Fotorealistik / Editorial, Tanpa Blur Murahan)
+1. **Hapus total:**
+   - Hapus 22 cotton-ball `THREE.Sprite` berbasis lingkaran radial di `IndustrialRobots3D.jsx`.
+   - Hapus semua kurva SVG gelombang + `filter: blur(...)` pada `.fh-cloud-*` di `index.css`.
+2. **Ganti dengan 3 Lapis Awan Berdetail Tinggi (100% aset lokal Autobotz di `public/img/sky/` atau GLSL fBM Shader):**
+   - **Opsi A (Direkomendasikan — 3 Aset WebP/PNG Transparan Resolusi Tinggi dari Multi-Octave fBM + Worley Noise atau fotografi awan bebas lisensi):**
+     - `public/img/sky/cloud-far.webp` (`2000×360`): serat *cirrus* tipis, `opacity: 0.72`, paralaks lambat.
+     - `public/img/sky/cloud-mid.webp` (`2400×560`): kumulus berdetail tinggi (6–8 oktaf *fractal noise* + *directional rim lighting* puncak `#FFE4C4`, badan `#E07E52`, dasar bayangan `#24182E`), `opacity: 0.92`, **`filter: none`**.
+     - `public/img/sky/cloud-front.webp` (`1500×820`): bank awan depan bertekstur tajam untuk tirai pembelah `.fh-cloud-veil-l` dan `.fh-cloud-veil-r` (`transform: scaleX(-1)` di sisi kanan) yang menyibak ke kiri/kanan saat scroll.
+   - **Opsi B (Jika murni prosedural di WebGL):** 1 *fullscreen/sky-plane* **GLSL `THREE.ShaderMaterial`** dengan **6-octave domain-warped fBM + directional sun scattering** (bukan `Sprite` lingkaran) sehingga awan memiliki serat halus, bayangan volumetrik internal (*self-shadowing*), dan pergerakan organik 60fps.
+3. **Aturan Pencahayaan & Warna Awan (Harmonis dengan Sunrise + Glassmorphism Autobotz):**
+   - **Puncak (Sunlit Silver/Gold Rim):** `#FFE6C7` → `#FFB06B` (cahaya matahari dari belakang-bawah).
+   - **Badan Tengah:** `#C9684E` → `#75384B`.
+   - **Dasar Bayangan (Shadow Underbelly):** `#22162A` → `#090B10` (menyatu mulus ke ground `#090B10` di section bawah).
+   - **Larangan:** Dilarang memberi CSS `filter: blur()` pada lapisan awan utama, dilarang lingkaran radial polos, dan dilarang tekstur awan berulang (*tiling seam*) yang terlihat patah.
+
+### C. Kriteria Lulus (Second Check Rina)
+- [ ] Tidak ada lagi pola lingkaran/bola kapas radial atau kurva SVG blur di belakang robot.
+- [ ] Tepi awan terlihat berserat tajam (*wispy cumulus*) dengan kontras jelas antara puncak terang dan dasar gelap seperti kualitas editorial FluxCode.
+- [ ] Tirai awan kiri–kanan membelah halus saat scroll tanpa tepi kotak terpotong (*hard edge*), dan tetap menyisakan kedalaman awan di latar belakang Beat 1–3.
+- [ ] Performa tetap mulus 60fps (`decoding="async"`, `preload` untuk `cloud-mid.webp`, `0` error konsol/WebGL).

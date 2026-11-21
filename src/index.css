@@ -834,81 +834,85 @@
   will-change: transform;
 }
 
-@keyframes cloudDriftSlow {
-  0% { background-position-x: 0px; }
-  100% { background-position-x: 1200px; }
+@keyframes fhCloudDrift {
+  0% { translate: -3.2vw 0; }
+  100% { translate: 3.2vw 0; }
 }
 
-.fh-cloud {
+.fh-sky-cloud {
   position: absolute;
-  left: -10%;
-  right: -10%;
+  display: block;
+  max-width: none;
+  height: auto;
   pointer-events: none;
-  background-repeat: repeat-x;
   will-change: transform, opacity;
 }
 
 .fh-cloud-far {
-  top: 12%;
-  height: 260px;
-  opacity: calc(0.76 - var(--cc, 0) * 0.14);
-  background-size: 1200px 260px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='260' viewBox='0 0 1200 260'%3E%3Cdefs%3E%3ClinearGradient id='cfTop' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.88'/%3E%3Cstop offset='0.52' stop-color='%23F79654' stop-opacity='0.58'/%3E%3Cstop offset='1' stop-color='%235C2640' stop-opacity='0.06'/%3E%3C/linearGradient%3E%3ClinearGradient id='cfBack' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFD3A6' stop-opacity='0.65'/%3E%3Cstop offset='1' stop-color='%234C2038' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 220 C40 160 110 140 175 162 C215 98 310 86 380 126 C440 72 555 78 615 130 C680 84 785 92 845 140 C915 94 1020 104 1085 152 C1135 130 1175 148 1200 220 Z' fill='url(%23cfBack)'/%3E%3Cpath d='M0 245 C50 182 135 162 210 185 C265 112 375 102 448 148 C515 96 635 104 702 156 C768 110 882 118 948 168 C1015 128 1120 140 1200 245 Z' fill='url(%23cfTop)'/%3E%3C/svg%3E");
-  filter: blur(4px);
-  transform: translate3d(calc(var(--p, 0) * -8vw), calc(var(--p, 0) * 4svh), 0);
-  animation: cloudDriftSlow 90s linear infinite;
+  --cw: max(1500px, 122vw);
+  width: var(--cw);
+  left: 50%;
+  margin-left: calc(var(--cw) / -2);
+  top: 8%;
+  opacity: calc(0.78 - var(--cc, 0) * 0.14);
+  animation: fhCloudDrift 90s ease-in-out infinite alternate;
+  transform: translate3d(calc(var(--p, 0) * -9vw), calc(var(--p, 0) * 5svh), 0);
 }
 
 .fh-cloud-mid {
-  top: 34%;
-  height: 300px;
-  opacity: calc(0.86 - var(--cc, 0) * 0.24);
-  background-size: 1200px 300px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='0 0 1200 300'%3E%3Cdefs%3E%3ClinearGradient id='cmLit' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.92'/%3E%3Cstop offset='0.48' stop-color='%23F79654' stop-opacity='0.64'/%3E%3Cstop offset='1' stop-color='%235C2640' stop-opacity='0.08'/%3E%3C/linearGradient%3E%3ClinearGradient id='cmDepth' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFE0BA' stop-opacity='0.78'/%3E%3Cstop offset='0.65' stop-color='%23C95B49' stop-opacity='0.36'/%3E%3Cstop offset='1' stop-color='%23331528' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx='160' cy='190' rx='170' ry='78' fill='url(%23cmDepth)'/%3E%3Cellipse cx='490' cy='175' rx='210' ry='92' fill='url(%23cmDepth)'/%3E%3Cellipse cx='860' cy='182' rx='220' ry='88' fill='url(%23cmDepth)'/%3E%3Cpath d='M0 265 C60 190 140 168 215 194 C265 118 375 110 440 162 C505 88 640 94 705 162 C770 108 890 116 955 174 C1030 132 1135 150 1200 265 Z' fill='url(%23cmLit)'/%3E%3C/svg%3E");
-  filter: blur(3px);
-  transform: translate3d(calc(var(--p, 0) * 6vw), calc(var(--z, 0) * -8svh), 0) scale(calc(1 + var(--z, 0) * 0.16));
-  animation: cloudDriftSlow 62s linear infinite reverse;
+  --cw: max(1850px, 148vw);
+  width: var(--cw);
+  left: 50%;
+  margin-left: calc(var(--cw) / -2);
+  top: 22%;
+  opacity: calc(0.96 - var(--h, 0) * 0.28 - var(--sp, 0) * 0.40);
+  animation: fhCloudDrift 70s ease-in-out infinite alternate-reverse;
+  transform: translate3d(calc(var(--p, 0) * 6vw), calc(var(--z, 0) * -14svh), 0) scale(calc(1 + var(--z, 0) * 0.22));
 }
 
-/* Sculpted 2-Way Parting Foreground Cumulus Curtains: Shroud Distant Robot at p=0, Split Cleanly LEFT & RIGHT on Scroll */
+/* Photographic 2-Way Parting Cumulus Curtains: Overlap Over Distant Robot at p=0, Split Cleanly LEFT & RIGHT */
+.fh-cloud-veil {
+  position: absolute;
+  top: 8%;
+  width: min(1350px, 88vw);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.fh-cloud-veil img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
 .fh-cloud-veil-l {
-  top: 12%;
-  left: -16%;
-  width: 78vw;
-  height: 70vh;
-  opacity: calc(0.95 - var(--cc, 0) * 0.72);
-  background-size: 100% 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'%3E%3Cdefs%3E%3CradialGradient id='cvlPuff' cx='48%25' cy='40%25' r='55%25'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.96'/%3E%3Cstop offset='0.48' stop-color='%23F79654' stop-opacity='0.72'/%3E%3Cstop offset='0.82' stop-color='%235C2640' stop-opacity='0.32'/%3E%3Cstop offset='1' stop-color='%2324121E' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse cx='330' cy='290' rx='260' ry='145' fill='url(%23cvlPuff)'/%3E%3Cellipse cx='520' cy='260' rx='270' ry='165' fill='url(%23cvlPuff)'/%3E%3Cellipse cx='420' cy='180' rx='215' ry='135' fill='url(%23cvlPuff)'/%3E%3Cellipse cx='620' cy='320' rx='220' ry='125' fill='url(%23cvlPuff)'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  filter: blur(9px);
-  transform: translate3d(calc(var(--cc, 0) * -52vw), calc(var(--cc, 0) * -4svh), 0) scale(calc(1 + var(--cc, 0) * 0.16));
+  left: calc(50% + 18vw - min(1350px, 88vw));
+  opacity: calc(0.98 * (1 - var(--cc, 0) * 0.72) * (1 - var(--h, 0) * 0.85));
+  transform: translate3d(calc(var(--cc, 0) * -56vw), calc(var(--cc, 0) * -3svh), 0) scale(calc(1 + var(--cc, 0) * 0.16));
 }
 
 .fh-cloud-veil-r {
-  top: 14%;
-  left: auto;
-  right: -16%;
-  width: 78vw;
-  height: 70vh;
-  opacity: calc(0.95 - var(--cc, 0) * 0.72);
-  background-size: 100% 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'%3E%3Cdefs%3E%3CradialGradient id='cvrPuff' cx='52%25' cy='40%25' r='55%25'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.96'/%3E%3Cstop offset='0.48' stop-color='%23F79654' stop-opacity='0.70'/%3E%3Cstop offset='0.82' stop-color='%235C2640' stop-opacity='0.30'/%3E%3Cstop offset='1' stop-color='%2324121E' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse cx='570' cy='290' rx='260' ry='145' fill='url(%23cvrPuff)'/%3E%3Cellipse cx='380' cy='260' rx='270' ry='165' fill='url(%23cvrPuff)'/%3E%3Cellipse cx='480' cy='180' rx='215' ry='135' fill='url(%23cvrPuff)'/%3E%3Cellipse cx='280' cy='320' rx='220' ry='125' fill='url(%23cvrPuff)'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  filter: blur(9px);
-  transform: translate3d(calc(var(--cc, 0) * 52vw), calc(var(--cc, 0) * -4svh), 0) scale(calc(1 + var(--cc, 0) * 0.16));
+  right: calc(50% + 18vw - min(1350px, 88vw));
+  opacity: calc(0.98 * (1 - var(--cc, 0) * 0.72) * (1 - var(--h, 0) * 0.85));
+  transform: translate3d(calc(var(--cc, 0) * 56vw), calc(var(--cc, 0) * -3svh), 0) scale(calc(1 + var(--cc, 0) * 0.16));
+}
+
+.fh-cloud-veil-r img {
+  transform: scaleX(-1);
 }
 
 .fh-cloud-near {
-  bottom: -4%;
-  height: 230px;
-  opacity: calc(0.84 - var(--cc, 0) * 0.34);
-  background-size: 1200px 230px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='230' viewBox='0 0 1200 230'%3E%3Cdefs%3E%3ClinearGradient id='cn' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFD9B3' stop-opacity='0.52'/%3E%3Cstop offset='0.45' stop-color='%23B44B48' stop-opacity='0.65'/%3E%3Cstop offset='1' stop-color='%23090B10' stop-opacity='0.96'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 230 L0 135 C75 82 180 72 260 112 C340 48 485 52 575 110 C665 56 805 62 895 115 C985 78 1110 88 1200 135 L1200 230 Z' fill='url(%23cn)'/%3E%3C/svg%3E");
-  filter: blur(5px);
-  transform: translate3d(0, calc((1 - var(--z, 0)) * 8svh), 0);
+  --cw: max(1650px, 128vw);
+  width: var(--cw);
+  left: 50%;
+  margin-left: calc(var(--cw) / -2);
+  top: 40%;
+  opacity: calc(0.94 * (1 - var(--h, 0) * 0.68) * (1 - var(--sp, 0) * 0.90));
+  transform: translate3d(0, calc((1 - var(--z, 0)) * 12svh + var(--h, 0) * 18svh), 0) scale(calc(1 + var(--z, 0) * 0.14));
 }
 
-/* Swirling Soft Volumetric Cloud Mist Behind Beat 3 Arsitektur & Keamanan UI */
+/* Soft Atmospheric Cumulus Mist Behind Beat 3 Arsitektur & Keamanan UI */
 .fh-spotlight-clouds {
   position: absolute;
   inset: -8%;
@@ -917,42 +921,60 @@
   overflow: hidden;
   opacity: var(--sp, 0);
   background:
-    radial-gradient(ellipse 68% 46% at 22% 72%, rgba(255, 168, 102, 0.38), transparent 68%),
-    radial-gradient(ellipse 64% 48% at 78% 66%, rgba(253, 24, 67, 0.28), transparent 66%),
-    radial-gradient(ellipse 84% 58% at 50% 88%, rgba(255, 224, 184, 0.26), rgba(9, 11, 16, 0.84) 72%),
-    linear-gradient(180deg, rgba(9, 11, 16, 0.48) 0%, rgba(18, 15, 28, 0.68) 65%, rgba(9, 11, 16, 0.96) 100%);
+    radial-gradient(ellipse 68% 46% at 22% 72%, rgba(255, 168, 102, 0.28), transparent 68%),
+    radial-gradient(ellipse 64% 48% at 78% 66%, rgba(253, 24, 67, 0.20), transparent 66%),
+    linear-gradient(180deg, rgba(9, 11, 16, 0.72) 0%, rgba(14, 15, 24, 0.84) 65%, rgba(9, 11, 16, 0.97) 100%);
   transform: translate3d(0, calc((1 - var(--sp, 0)) * 8svh), 0);
   will-change: transform, opacity;
 }
 
-.fh-spotlight-clouds::before,
-.fh-spotlight-clouds::after {
+.fh-spot-cloud {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.fh-spot-cloud-a {
+  --cw: max(1850px, 145vw);
+  width: var(--cw);
+  left: 50%;
+  margin-left: calc(var(--cw) / -2);
+  top: 18%;
+  opacity: 0.32;
+  animation: fhCloudDrift 68s ease-in-out infinite;
+}
+
+.fh-spot-cloud-b {
+  --cw: max(1650px, 130vw);
+  width: var(--cw);
+  left: 50%;
+  margin-left: calc(var(--cw) / -2);
+  top: 44%;
+  opacity: 0.22;
+  animation: fhCloudDrift 52s ease-in-out infinite reverse;
+}
+
+/* FluxCode-style Soft Radial Contrast Scrim Behind Hero Left Copy (keeps bright clouds legible) */
+.fh-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.fh-hero-copy::before {
   content: "";
   position: absolute;
-  left: -10%;
-  right: -10%;
+  z-index: -1;
+  inset: -26% -22% -26% -34%;
   pointer-events: none;
-  background-repeat: repeat-x;
-}
-
-.fh-spotlight-clouds::before {
-  bottom: 4%;
-  height: 300px;
-  opacity: 0.42;
-  background-size: 1200px 300px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='0 0 1200 300'%3E%3Cdefs%3E%3ClinearGradient id='sc1' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFE4C4' stop-opacity='0.65'/%3E%3Cstop offset='0.55' stop-color='%23F79654' stop-opacity='0.34'/%3E%3Cstop offset='1' stop-color='%23090B10' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 280 C70 190 175 162 275 198 C355 110 495 104 590 175 C675 102 820 112 910 182 C1000 132 1120 148 1200 280 Z' fill='url(%23sc1)'/%3E%3C/svg%3E");
-  filter: blur(6px);
-  animation: cloudDriftSlow 65s linear infinite;
-}
-
-.fh-spotlight-clouds::after {
-  top: 14%;
-  height: 240px;
-  opacity: 0.32;
-  background-size: 1200px 240px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='240' viewBox='0 0 1200 240'%3E%3Cdefs%3E%3ClinearGradient id='sc2' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFBE88' stop-opacity='0.52'/%3E%3Cstop offset='0.6' stop-color='%238B3A52' stop-opacity='0.22'/%3E%3Cstop offset='1' stop-color='%23090B10' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 220 C85 135 200 115 305 152 C400 72 545 78 635 142 C725 84 870 92 965 152 C1055 112 1140 125 1200 220 Z' fill='url(%23sc2)'/%3E%3C/svg%3E");
-  filter: blur(8px);
-  animation: cloudDriftSlow 46s linear infinite reverse;
+  background: radial-gradient(
+    closest-side,
+    rgba(9, 11, 18, 0.76) 0%,
+    rgba(9, 11, 18, 0.44) 56%,
+    transparent 100%
+  );
 }
 
 /* Seated Robot Physical Weight + Top-Edge Contact Shadow on "Sewa Bot Cloud" Button */
@@ -1123,8 +1145,7 @@
   .fh-hint::after,
   .fh-cloud-far,
   .fh-cloud-mid,
-  .fh-spotlight-clouds::before,
-  .fh-spotlight-clouds::after {
+  .fh-spot-cloud {
     animation: none !important;
   }
 }

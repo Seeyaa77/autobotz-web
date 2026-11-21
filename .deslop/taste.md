@@ -99,3 +99,12 @@
 - ❌ Panel filler `AUTOBOTZ LIVE INFRASTRUCTURE` yang informasinya kurang penting.
 - ❌ Robot terlihat melayang di dekat tombol tanpa *contact shadow* atau pose menumpu yang jelas.
 - ❌ Background polos tanpa kabut setelah tirai awan depan memudar.
+
+
+### Tambahan 2026-11-21 (Upgrade Kualitas Awan Setara FluxCode — Anti Awan AI/Blobby)
+**Choices**
+- **Awan Detail Berlapis Tanpa Blur Murahan:** Menggunakan 3 lapis awan transparan beresolusi tinggi (`cloud-far` `2000×360`, `cloud-mid` `2400×560`, `cloud-front` `1500×820` dicerminkan kiri–kanan) dengan tepi berserat tajam (*wispy cumulus*, `filter: none`, *directional sunrise lighting* puncak terang & dasar bayangan gelap), atau GLSL 6-octave fBM shader.
+
+**Vetoes**
+- ❌ Sprite awan lingkaran radial berulang (`256×256` cotton-ball) yang terlihat artifisial/seperti hasil generate AI.
+- ❌ Kurva awan SVG gelombang dengan CSS `filter: blur(6px–8px)` yang tampak seperti kartun/plastik.
