@@ -4,7 +4,6 @@ import { getCurrentUser } from './lib/supabase'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Hero from './sections/Hero'
-import Features from './sections/Features'
 import Pricing from './sections/Pricing'
 import BotDemo from './sections/BotDemo'
 import HowItWorks from './sections/HowItWorks'
@@ -18,11 +17,10 @@ import AdminDashboard from './pages/AdminDashboard'
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-brand-chill-white flex flex-col">
+    <div className="min-h-screen bg-transparent text-[#F4F6FA] flex flex-col">
       <Header />
       <main className="flex-1">
         <Hero />
-        <Features />
         <BotDemo />
         <Pricing />
         <HowItWorks />

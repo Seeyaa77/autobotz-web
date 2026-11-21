@@ -62,11 +62,11 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-chill-white flex flex-col justify-between py-10 px-4">
+    <div className="min-h-screen bg-transparent flex flex-col justify-between py-10 px-4">
       <div className="container-brutalist w-full">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 font-heading font-bold text-xs sm:text-sm text-brand-dark hover:text-brand-pink transition-colors"
+          className="inline-flex items-center gap-2 font-heading font-bold text-xs sm:text-sm text-[#F4F6FA] hover:text-brand-pink transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Beranda</span>
@@ -76,22 +76,22 @@ export default function Register() {
       <div className="w-full max-w-md mx-auto my-8 space-y-6">
         <div className="space-y-2 text-left">
           <div className="inline-flex items-center gap-2.5">
-            <div className="w-10 h-10 bg-brand-pink rounded-xl border-2 border-brand-dark flex items-center justify-center">
+            <div className="w-10 h-10 bg-brand-pink rounded-xl border border-white/[0.1] flex items-center justify-center">
               <Bot className="w-5 h-5 text-white" />
             </div>
-            <span className="font-brand text-3xl font-bold text-brand-dark">Autobotz</span>
+            <span className="font-brand text-3xl font-bold text-[#F4F6FA]">Autobotz</span>
           </div>
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-brand-dark pt-2">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F4F6FA] pt-2">
             Registrasi Akun Merchant
           </h1>
-          <p className="text-xs sm:text-sm text-brand-muted font-sans">
+          <p className="text-xs sm:text-sm text-[#A8B0C2] font-sans">
             Buat akun untuk menyewa bot cloud atau membeli lisensi source code.
           </p>
         </div>
 
-        <div className="bg-white border-2 border-brand-dark rounded-2xl p-6 sm:p-8 space-y-5">
+        <div className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-6 sm:p-8 space-y-5">
           {error && (
-            <div className="p-3.5 bg-red-50 border-2 border-brand-pink rounded-xl text-brand-pink text-xs font-mono font-bold flex items-start gap-2">
+            <div className="p-3.5 bg-[#FD1843]/10 border-2 border-brand-pink rounded-xl text-brand-pink text-xs font-mono font-bold flex items-start gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -174,7 +174,7 @@ export default function Register() {
             </div>
           </form>
 
-          <div className="pt-4 border-t-2 border-brand-dark/10 flex items-center justify-between text-xs font-sans text-brand-muted">
+          <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-sans text-[#A8B0C2]">
             <span>Sudah punya akun merchant?</span>
             <Link
               to={redirectPath ? `/login?redirect=${encodeURIComponent(redirectPath)}` : '/login'}
@@ -186,7 +186,7 @@ export default function Register() {
         </div>
       </div>
 
-      <div className="container-brutalist text-center text-xs font-mono text-brand-muted">
+      <div className="container-brutalist text-center text-xs font-mono text-[#A8B0C2]">
         <span>Data profil dilindungi kebijakan privasi &amp; tidak pernah dibagikan ke pihak ketiga</span>
       </div>
     </div>

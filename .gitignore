@@ -46,3 +46,4 @@ Thumbs.db
 backend-test.log
 vite-test.log
 vite-err.log
+.reanimate/

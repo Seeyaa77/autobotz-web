@@ -131,10 +131,10 @@ export default function AdminDashboard() {
 
   if (authChecking) {
     return (
-      <div className="min-h-screen bg-brand-chill-white flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-white border-2 border-brand-dark rounded-2xl p-6 space-y-4 animate-pulse">
-          <div className="h-6 w-48 bg-gray-200 rounded" />
-          <div className="h-4 w-full bg-gray-100 rounded" />
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-6">
+        <div className="w-full max-w-md bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-6 space-y-4 animate-pulse">
+          <div className="h-6 w-48 bg-white/[0.1] rounded" />
+          <div className="h-4 w-full bg-white/[0.06] rounded" />
         </div>
       </div>
     )
@@ -142,13 +142,13 @@ export default function AdminDashboard() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-brand-chill-white flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white border-2 border-brand-dark rounded-2xl p-8 text-center space-y-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-6">
+        <div className="max-w-md w-full bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-8 text-center space-y-4">
           <ShieldCheck className="w-10 h-10 text-brand-pink mx-auto" />
-          <h1 className="font-heading font-extrabold text-2xl text-brand-dark">
+          <h1 className="font-heading font-extrabold text-2xl text-[#F4F6FA]">
             Akses Ditolak (403 Admin Only)
           </h1>
-          <p className="text-xs sm:text-sm text-brand-muted font-sans">
+          <p className="text-xs sm:text-sm text-[#A8B0C2] font-sans">
             Akun Anda (<code>{user?.email}</code>) tidak memiliki role <code>admin</code> pada tabel <code>profiles</code>.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
@@ -165,10 +165,10 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-chill-white flex flex-col">
+    <div className="min-h-screen bg-transparent flex flex-col">
       
       {/* Admin Top Bar */}
-      <header className="bg-brand-dark text-white border-b-2 border-brand-dark px-4 sm:px-6 py-4">
+      <header className="bg-[#090B10]/90 text-[#F4F6FA] border-b border-white/[0.08] px-4 sm:px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-2">
@@ -206,10 +206,10 @@ export default function AdminDashboard() {
             <p className="font-mono text-xs font-bold uppercase tracking-wider text-brand-pink">
               KONTROL PEMBAYARAN &amp; AKTIVASI PAKET
             </p>
-            <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-brand-dark">
+            <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F4F6FA]">
               Verifikasi Bukti Transfer Manual
             </h1>
-            <p className="text-xs sm:text-sm text-brand-muted mt-1">
+            <p className="text-xs sm:text-sm text-[#A8B0C2] mt-1">
               Tautan bukti transfer menggunakan Signed URL privat yang berlaku selama 10 menit.
             </p>
           </div>
@@ -225,8 +225,8 @@ export default function AdminDashboard() {
                 }}
                 className={`px-3 py-2 rounded-xl border-2 font-mono text-xs font-bold uppercase cursor-pointer ${
                   statusFilter === st
-                    ? 'border-brand-dark bg-brand-pink text-white shadow-brutalist-sm'
-                    : 'border-brand-dark bg-white text-brand-dark hover:bg-brand-surface-tint'
+                    ? 'border-white/[0.12] bg-brand-pink text-white shadow-md'
+                    : 'border-white/[0.12] bg-[#121621]/65 backdrop-blur-md text-[#F4F6FA] hover:bg-white/[0.05]'
                 }`}
               >
                 {st.replace('_', ' ')}
@@ -246,7 +246,7 @@ export default function AdminDashboard() {
         </div>
 
         {error && (
-          <div className="p-4 rounded-xl bg-red-50 border-2 border-brand-pink text-brand-pink text-xs font-mono font-bold flex items-center justify-between gap-3">
+          <div className="p-4 rounded-xl bg-[#FD1843]/10 border-2 border-brand-pink text-brand-pink text-xs font-mono font-bold flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
         )}
 
         {actionNotice && (
-          <div className="p-4 rounded-xl bg-green-50 border-2 border-brand-mint text-brand-dark text-xs font-mono font-bold flex items-center gap-2">
+          <div className="p-4 rounded-xl bg-[#10B981]/10 border-2 border-brand-mint text-[#F4F6FA] text-xs font-mono font-bold flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-brand-mint shrink-0" />
             <span>{actionNotice}</span>
           </div>
@@ -269,15 +269,15 @@ export default function AdminDashboard() {
           {loading ? (
             <div className="p-6 space-y-3">
               {[1, 2, 3].map((n) => (
-                <div key={n} className="h-14 bg-gray-100 border-b border-gray-200 animate-pulse rounded" />
+                <div key={n} className="h-14 bg-white/[0.06] border-b border-white/[0.08] animate-pulse rounded" />
               ))}
             </div>
           ) : orders.length === 0 ? (
             <div className="p-12 text-center space-y-2">
-              <p className="font-heading font-bold text-base text-brand-dark">
+              <p className="font-heading font-bold text-base text-[#F4F6FA]">
                 Tidak Ada Pesanan dengan Status "{statusFilter}"
               </p>
-              <p className="text-xs text-brand-muted">
+              <p className="text-xs text-[#A8B0C2]">
                 Seluruh antrean verifikasi pada kategori ini sudah bersih.
               </p>
             </div>
@@ -285,7 +285,7 @@ export default function AdminDashboard() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-sans">
                 <thead>
-                  <tr className="bg-brand-surface-tint border-b-2 border-brand-dark text-brand-dark font-mono uppercase">
+                  <tr className="bg-[#0D1017]/80 border-b border-white/[0.08] text-[#F4F6FA] font-mono uppercase">
                     <th className="p-4">Order ID</th>
                     <th className="p-4">Email Merchant</th>
                     <th className="p-4">Paket</th>
@@ -303,15 +303,15 @@ export default function AdminDashboard() {
                     return (
                       <tr
                         key={ord.id}
-                        className="border-b-2 border-brand-dark/15 bg-white hover:bg-brand-surface-tint/40 transition-colors"
+                        className="border-b border-white/[0.08] bg-[#121621]/65 backdrop-blur-md hover:bg-white/[0.04] transition-colors"
                       >
-                        <td className="p-4 font-mono font-bold text-brand-dark">
+                        <td className="p-4 font-mono font-bold text-[#F4F6FA]">
                           {String(ord.id).slice(0, 10)}
                         </td>
-                        <td className="p-4 font-medium text-brand-dark">
+                        <td className="p-4 font-medium text-[#F4F6FA]">
                           {ord.user_email || 'â€”'}
                         </td>
-                        <td className="p-4 font-heading font-bold text-brand-dark">
+                        <td className="p-4 font-heading font-bold text-[#F4F6FA]">
                           {ord.plan_name || ord.plan_slug}
                         </td>
                         <td className="p-4 font-mono font-bold text-brand-pink">
@@ -326,7 +326,7 @@ export default function AdminDashboard() {
                               <button
                                 type="button"
                                 onClick={() => setPreviewOrder(ord)}
-                                className="px-2.5 py-1 rounded-md border-2 border-brand-dark bg-brand-surface-tint font-mono text-[11px] font-bold inline-flex items-center gap-1 hover:bg-brand-pink hover:text-white transition-colors"
+                                className="px-2.5 py-1 rounded-md border border-white/[0.1] bg-white/[0.05] font-mono text-[11px] font-bold inline-flex items-center gap-1 hover:bg-brand-pink hover:text-white transition-colors"
                               >
                                 <Eye className="w-3.5 h-3.5" />
                                 <span>Preview</span>
@@ -342,10 +342,10 @@ export default function AdminDashboard() {
                               </a>
                             </div>
                           ) : (
-                            <span className="font-mono text-brand-muted">Belum diunggah</span>
+                            <span className="font-mono text-[#A8B0C2]">Belum diunggah</span>
                           )}
                         </td>
-                        <td className="p-4 font-mono text-brand-muted">
+                        <td className="p-4 font-mono text-[#A8B0C2]">
                           {formatDateId(ord.created_at)}
                         </td>
                         <td className="p-4 text-right">
@@ -388,26 +388,26 @@ export default function AdminDashboard() {
         {/* Proof Image Modal Preview */}
         {previewOrder && (
           <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
-            <div className="bg-white border-2 border-brand-dark rounded-2xl max-w-lg w-full p-6 space-y-4">
-              <div className="flex items-center justify-between border-b-2 border-brand-dark pb-3">
+            <div className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-lg w-full p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                 <div>
-                  <h3 className="font-heading font-bold text-base text-brand-dark">
+                  <h3 className="font-heading font-bold text-base text-[#F4F6FA]">
                     Bukti Transfer #{String(previewOrder.id).slice(0, 8)}
                   </h3>
-                  <p className="font-mono text-xs text-brand-muted">
+                  <p className="font-mono text-xs text-[#A8B0C2]">
                     {previewOrder.user_email} â€¢ {formatIdr(previewOrder.amount_idr)}
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setPreviewOrder(null)}
-                  className="p-1.5 rounded-lg border-2 border-brand-dark hover:bg-brand-surface-tint"
+                  className="p-1.5 rounded-lg border border-white/[0.1] hover:bg-white/[0.05]"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="bg-brand-surface-tint border-2 border-brand-dark rounded-xl p-3 flex items-center justify-center max-h-96 overflow-auto">
+              <div className="bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] rounded-xl p-3 flex items-center justify-center max-h-96 overflow-auto">
                 <img
                   src={previewOrder.proof_url || previewOrder.payment_proof_url}
                   alt="Bukti pembayaran"
@@ -441,16 +441,16 @@ export default function AdminDashboard() {
           <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
             <form
               onSubmit={handleConfirmReject}
-              className="bg-white border-2 border-brand-dark rounded-2xl max-w-md w-full p-6 space-y-4"
+              className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-md w-full p-6 space-y-4"
             >
-              <div className="flex items-center justify-between border-b-2 border-brand-dark pb-3">
-                <h3 className="font-heading font-bold text-base text-brand-dark">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+                <h3 className="font-heading font-bold text-base text-[#F4F6FA]">
                   Tolak Pesanan #{String(rejectTargetOrder.id).slice(0, 8)}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setRejectTargetOrder(null)}
-                  className="p-1.5 rounded-lg border-2 border-brand-dark"
+                  className="p-1.5 rounded-lg border border-white/[0.1]"
                 >
                   <X className="w-4 h-4" />
                 </button>

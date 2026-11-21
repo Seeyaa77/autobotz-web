@@ -8,8 +8,8 @@ export default {
     extend: {
       fontFamily: {
         'sans': ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-        'heading': ['"Space Grotesk"', '"Plus Jakarta Sans"', 'sans-serif'],
-        'brand': ['"Matcha Style"', '"Space Grotesk"', 'sans-serif'],
+        'heading': ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
+        'brand': ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
         'mono': ['"JetBrains Mono"', 'monospace'],
       },
       colors: {

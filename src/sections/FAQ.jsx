@@ -33,7 +33,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="py-16 md:py-24 bg-brand-chill-white border-b-2 border-brand-dark stage-3d">
+    <section id="faq" className="py-16 md:py-24 bg-transparent border-b border-white/[0.08] stage-3d">
       <div className="container-brutalist space-y-10">
         
         <ScrollReveal3D direction="up" className="max-w-2xl space-y-2 text-left">
@@ -54,23 +54,23 @@ export default function FAQ() {
                 key={idx}
                 direction="up"
                 delay={idx * 55}
-                className="bg-white border-2 border-brand-dark rounded-xl overflow-hidden"
+                className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)] overflow-hidden"
               >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : idx)}
                   aria-expanded={isOpen}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading font-bold text-sm sm:text-base text-brand-dark hover:bg-brand-surface-tint/60 transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading font-bold text-sm sm:text-base text-[#F4F6FA] hover:bg-white/[0.05] transition-colors"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-brand-dark shrink-0 transition-transform duration-150 ${
+                    className={`w-5 h-5 text-[#F4F6FA] shrink-0 transition-transform duration-150 ${
                       isOpen ? 'rotate-180 text-brand-pink' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-3 text-xs sm:text-sm text-brand-muted leading-relaxed font-sans border-t-2 border-brand-dark/10 bg-brand-surface-tint/30">
+                  <div className="px-5 pb-5 pt-3 text-xs sm:text-sm text-[#A8B0C2] leading-relaxed font-sans border-t border-white/[0.08] bg-white/[0.03]">
                     {faq.a}
                   </div>
                 )}

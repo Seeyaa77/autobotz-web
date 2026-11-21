@@ -52,3 +52,50 @@
 3. **Animasi 4 Langkah Teknis yang Sempit, Patah-Patah, dan Kurang Informatif (2026-11-21):**
    - **Ditolak oleh user.** Harus diperluas menjadi kartu 2x2 yang detail, animasi 3D mengalir mulus (*smooth*), dan penjelasan teknisnya lengkap.
 4. **Badge `"SLA 99.9% ONLINE"` di `Header.jsx` & 12 Sinyal AI-Slop:** Tetap dilarang.
+
+
+### Tambahan 2026-11-21 (Motion v3 — masukan user "animasi frame to frame, Langkah 04 tidak seperti Telegram")
+**Choices**
+- Animasi 4 Langkah harus **mengalir kontinu** (timeline CSS per kartu, stagger 600ms, hold + fade reset), bukan pergantian state.
+- Langkah 04 wajib berupa **jendela chat Telegram mini yang otentik** (header bot, bubble ber-tail, jam + ✓✓ di dalam bubble, inline button terpisah, service pill "Pembayaran diterima", spoiler kredensial).
+- Simulator Telegram utama ditambah detail asli: tail bubble, status "bot"/"mengetik", avatar inisial gradien, ripple tombol inline, toast callback gaya Telegram, swap Mic↔Send, spoiler, smooth scroll.
+
+**Vetoes**
+- ❌ Jam global `setInterval` yang membuat semua panggung melompat serentak.
+- ❌ Teks status yang berganti instan tanpa crossfade; progress bar berbasis `width` yang meloncat.
+- ❌ Font mono & border neon di dalam bubble chat Telegram; header "AUTO-DELIVERY ENGINE".
+- ❌ Dot online hijau & chip "BOT" pada header bot Telegram (tidak ada di Telegram asli).
+- ❌ Pill "SIMULASI ALUR 3D AKTIF (FASE x/3)" — dekoratif.
+
+
+### Tambahan 2026-11-21 (Hero Palette Brand-Native & Walking Robots Background)
+**Choices**
+- **Palet Hero 100% Brand Autobotz (Bukan FluxCode):** Outer veil `#111217` (`brand-dark`) membuka ke latar terang Neo-Brutalist (`#FFF9FA → #FFF0F3 → #ECFDF5` + grid titik tipis), teks `#111217`, aksen `#FD1843` (`brand-pink`) & `#10B981` (`brand-mint`), strip metrik putih solid `border-2 border-brand-dark`.
+- **Latar Robot Berjalan:** 3 jalur kedalaman berisi robot SVG geometris Neo-Brutalist ringan yang berjalan kontinu dengan ayunan kaki & *body bob* halus di dalam `.fh-scene` (`opacity 0.14–0.22`, `pointer-events: none`, pause di luar layar, statis saat `prefers-reduced-motion`).
+
+**Vetoes**
+- ❌ Menyalin warna langit senja FluxCode (navy/indigo `#0a0f2c`/`#1d2554`, glow peach `#F6C991`, bintang `.fh-stars`, atau dark frosted glass strip).
+- ❌ Robot 3D clay generik AI atau robot ber-opacity terlalu pekat yang menabrak keterbacaan teks Hero.
+
+
+### Tambahan 2026-11-21 (Pivot Desain ke Dark Industrial Glassmorphism & 3D Industrial Robots)
+**Choices**
+- **Pivot Estetika Penuh ke Dark Industrial Glassmorphism:** Menggantikan Neo-Brutalism (kartu putih + border hitam tebal + shadow kotak solid) di seluruh website menjadi permukaan kaca gelap semi-transparan (`bg-[#121621]/55–70`, `backdrop-blur-md/xl`, border specular tipis `border-white/[0.09–0.14]`, latar `#090B10`) dengan aksen resmi Autobotz (`#FD1843`, `#10B981`, `#3897F0`).
+- **Robot Latar 3D Industrial:** Menggunakan robot 3D metalik terartikulasi (Three.js prosedural dengan pencahayaan PBR gunmetal/titanium & rim light crimson/biru) yang berjalan di latar belakang Hero, menggantikan 2D SVG flat.
+
+**Vetoes**
+- ❌ Mempertahankan sisa kartu putih Neo-Brutalist (`bg-white border-2 border-brand-dark shadow-brutalist`) yang bentrok dengan Hero gelap/glassmorphism.
+- ❌ Robot 2D gepeng atau robot kartun 3D clay imut — wajib bernuansa **3D industrial robotics**.
+- ❌ Glassmorphism buram ber-kontras rendah atau bola neon ungu generik AI.
+
+
+### Tambahan 2026-11-21 (Beat 3 = Arsitektur & Keamanan, Pose Duduk Realistis, Kabut Awan Volumetrik)
+**Choices**
+- **Beat 3 Spotlight = `ARSITEKTUR & KEAMANAN`:** Mengganti panel filler `AUTOBOTZ LIVE INFRASTRUCTURE` dengan 4 modul inti Arsitektur & Keamanan (tanpa duplikasi section di bawah Hero).
+- **Kontak Duduk Fisik Realistis:** Pinggul robot menempel tepat di `rect.top` tombol `Sewa Bot Cloud`, paha mendatar di atas tombol, kaki menggantung ke depan, tangan menumpu tepi tombol, plus *contact shadow* di permukaan tombol.
+- **Kabut Awan Volumetrik Nyata:** Kombinasi 3D WebGL mist sprites (`z = -4.5..+1.8`) + cumulus CSS bertekstur + hamparan kabut bawah permanen agar latar robot tidak pernah polos setelah tirai depan membelah.
+
+**Vetoes**
+- ❌ Panel filler `AUTOBOTZ LIVE INFRASTRUCTURE` yang informasinya kurang penting.
+- ❌ Robot terlihat melayang di dekat tombol tanpa *contact shadow* atau pose menumpu yang jelas.
+- ❌ Background polos tanpa kabut setelah tirai awan depan memudar.

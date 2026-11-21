@@ -223,24 +223,24 @@ export default function Payment() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-chill-white py-8 px-4">
+    <div className="min-h-screen bg-transparent py-8 px-4">
       <div className="container-brutalist space-y-8">
         
         {/* Top Bar */}
-        <div className="flex items-center justify-between border-b-2 border-brand-dark pb-4">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 font-heading font-bold text-xs sm:text-sm text-brand-dark hover:text-brand-pink transition-colors"
+            className="inline-flex items-center gap-2 font-heading font-bold text-xs sm:text-sm text-[#F4F6FA] hover:text-brand-pink transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Kembali ke Katalog Paket</span>
           </Link>
 
           <div className="flex items-center gap-3">
-            <Link to="/dashboard" className="font-mono text-xs font-bold text-brand-dark hover:text-brand-pink">
+            <Link to="/dashboard" className="font-mono text-xs font-bold text-[#F4F6FA] hover:text-brand-pink">
               Dashboard Merchant
             </Link>
-            <div className="w-8 h-8 rounded-lg bg-brand-pink border-2 border-brand-dark flex items-center justify-center text-white">
+            <div className="w-8 h-8 rounded-lg bg-brand-pink border border-white/[0.1] flex items-center justify-center text-white">
               <Bot className="w-4 h-4" />
             </div>
           </div>
@@ -251,22 +251,22 @@ export default function Payment() {
           <p className="font-mono text-xs font-bold uppercase tracking-wider text-brand-pink">
             CHECKOUT &amp; VERIFIKASI PEMBAYARAN
           </p>
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-brand-dark">
+          <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-[#F4F6FA]">
             Selesaikan Pemesanan Layanan Autobotz
           </h1>
-          <p className="text-xs sm:text-sm text-brand-muted font-sans">
+          <p className="text-xs sm:text-sm text-[#A8B0C2] font-sans">
             Harga diambil langsung dari tabel paket server. Pilih metode bayar, buat pesanan resmi, lalu unggah resi pembayaran Anda.
           </p>
         </div>
 
         {/* Auth Notice Banner if Not Logged In */}
         {!authChecking && !user && (
-          <div className="p-5 rounded-2xl bg-brand-surface-tint border-2 border-brand-dark flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <p className="font-heading font-bold text-sm text-brand-dark">
+              <p className="font-heading font-bold text-sm text-[#F4F6FA]">
                 Autentikasi Merchant Diperlukan untuk Membuat Order
               </p>
-              <p className="text-xs text-brand-muted font-sans">
+              <p className="text-xs text-[#A8B0C2] font-sans">
                 Setiap pesanan dikaitkan dengan akun Supabase Anda agar lisensi script dan bot cloud langsung aktif setelah pembayaran.
               </p>
             </div>
@@ -288,19 +288,19 @@ export default function Payment() {
           <div className="lg:col-span-7 space-y-6">
             
             {/* STEP 1: Select Plan & Payment Method */}
-            <div className="bg-white border-2 border-brand-dark rounded-2xl p-6 space-y-5">
-              <div className="flex items-center justify-between border-b-2 border-brand-dark/15 pb-3">
-                <h2 className="font-heading font-bold text-base sm:text-lg text-brand-dark">
+            <div className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-6 space-y-5">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+                <h2 className="font-heading font-bold text-base sm:text-lg text-[#F4F6FA]">
                   1. Pilih Paket &amp; Metode Pembayaran
                 </h2>
-                <span className="font-mono text-xs font-bold text-brand-muted">SERVER-VERIFIED</span>
+                <span className="font-mono text-xs font-bold text-[#A8B0C2]">SERVER-VERIFIED</span>
               </div>
 
               {/* Plan Selector Grid */}
               {plansLoading ? (
                 <div className="grid grid-cols-2 gap-3">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="h-20 rounded-xl bg-gray-100 border-2 border-gray-300 animate-pulse" />
+                    <div key={i} className="h-20 rounded-xl bg-white/[0.06] border-2 border-white/[0.1] animate-pulse" />
                   ))}
                 </div>
               ) : (
@@ -314,19 +314,19 @@ export default function Payment() {
                         onClick={() => setSelectedPlanSlug(p.slug)}
                         className={`p-3.5 rounded-xl border-2 text-left transition-all cursor-pointer ${
                           selected
-                            ? 'border-brand-dark bg-brand-surface-tint shadow-[3px_3px_0px_0px_#FD1843]'
-                            : 'border-brand-dark/30 bg-white hover:border-brand-dark'
+                            ? 'border-white/[0.12] bg-white/[0.05] shadow-[3px_3px_0px_0px_#FD1843]'
+                            : 'border-white/[0.12]/30 bg-[#121621]/65 backdrop-blur-md hover:border-white/[0.12]'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-heading font-bold text-xs sm:text-sm text-brand-dark">
+                          <span className="font-heading font-bold text-xs sm:text-sm text-[#F4F6FA]">
                             {p.name}
                           </span>
                           <span className="font-mono text-[10px] uppercase font-bold text-brand-pink">
                             {p.billing_cycle === 'one_time' ? 'LIFETIME' : '/BLN'}
                           </span>
                         </div>
-                        <p className="font-mono font-extrabold text-base text-brand-dark mt-1">
+                        <p className="font-mono font-extrabold text-base text-[#F4F6FA] mt-1">
                           {formatIdr(p.price_idr)}
                         </p>
                       </button>
@@ -337,7 +337,7 @@ export default function Payment() {
 
               {/* Payment Method Selector */}
               <div className="space-y-2">
-                <label className="block font-mono text-xs font-bold uppercase text-brand-dark">
+                <label className="block font-mono text-xs font-bold uppercase text-[#F4F6FA]">
                   Metode Pembayaran
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -355,8 +355,8 @@ export default function Payment() {
                         onClick={() => setPaymentMethod(m.id)}
                         className={`p-3 rounded-xl border-2 font-heading font-bold text-xs flex items-center gap-2 transition-all cursor-pointer ${
                           active
-                            ? 'border-brand-dark bg-brand-pink text-white shadow-brutalist-sm'
-                            : 'border-brand-dark bg-white text-brand-dark hover:bg-brand-surface-tint'
+                            ? 'border-white/[0.12] bg-brand-pink text-white shadow-md'
+                            : 'border-white/[0.12] bg-[#121621]/65 backdrop-blur-md text-[#F4F6FA] hover:bg-white/[0.05]'
                         }`}
                       >
                         <Icon className="w-4 h-4 shrink-0" />
@@ -368,7 +368,7 @@ export default function Payment() {
               </div>
 
               {orderError && (
-                <div className="p-3.5 rounded-xl bg-red-50 border-2 border-brand-pink text-brand-pink text-xs font-mono font-bold flex items-start gap-2">
+                <div className="p-3.5 rounded-xl bg-[#FD1843]/10 border-2 border-brand-pink text-brand-pink text-xs font-mono font-bold flex items-start gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                   <span>{orderError}</span>
                 </div>
@@ -394,9 +394,9 @@ export default function Payment() {
             </div>
 
             {/* STEP 2: Server Instructions (Shown once order exists or previewed) */}
-            <div className="bg-white border-2 border-brand-dark rounded-2xl p-6 space-y-5">
-              <div className="flex items-center justify-between border-b-2 border-brand-dark/15 pb-3">
-                <h2 className="font-heading font-bold text-base sm:text-lg text-brand-dark">
+            <div className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-6 space-y-5">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+                <h2 className="font-heading font-bold text-base sm:text-lg text-[#F4F6FA]">
                   2. Instruksi Pembayaran Resmi
                 </h2>
                 <Badge variant="dark">{paymentMethod.toUpperCase()}</Badge>
@@ -404,8 +404,8 @@ export default function Payment() {
 
               {/* Midtrans Redirect / Snap Token */}
               {paymentInfo?.redirect_url && (
-                <div className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark space-y-3">
-                  <p className="font-heading font-bold text-sm text-brand-dark">
+                <div className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] space-y-3">
+                  <p className="font-heading font-bold text-sm text-[#F4F6FA]">
                     Link Pembayaran Midtrans Snap Siap
                   </p>
                   <a
@@ -427,12 +427,12 @@ export default function Payment() {
                     instructions.bank_accounts.map((acc, idx) => (
                       <div
                         key={idx}
-                        className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark flex items-center justify-between gap-4"
+                        className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] flex items-center justify-between gap-4"
                       >
                         <div className="space-y-0.5 font-mono">
                           <span className="text-xs font-bold text-brand-pink uppercase">{acc.bank}</span>
-                          <p className="text-base font-extrabold text-brand-dark">{acc.number}</p>
-                          <p className="text-xs text-brand-muted">a.n. {acc.holder}</p>
+                          <p className="text-base font-extrabold text-[#F4F6FA]">{acc.number}</p>
+                          <p className="text-xs text-[#A8B0C2]">a.n. {acc.holder}</p>
                         </div>
                         <Button
                           type="button"
@@ -446,9 +446,9 @@ export default function Payment() {
                       </div>
                     ))
                   ) : (
-                    <div className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark text-xs font-mono text-brand-dark space-y-1">
+                    <div className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] text-xs font-mono text-[#F4F6FA] space-y-1">
                       <p className="font-bold">Rekening Bank Manual Belum Dikonfigurasi di Env Server</p>
-                      <p className="text-brand-muted">
+                      <p className="text-[#A8B0C2]">
                         Admin perlu mengisi variabel <code>MANUAL_BANK_ACCOUNTS_JSON</code> atau <code>MANUAL_BANK_BCA_ACCOUNT</code> di <code>.env.backend</code>. Setelah membuat order, Anda tetap dapat mengunggah bukti transfer di panel kanan.
                       </p>
                     </div>
@@ -460,20 +460,20 @@ export default function Payment() {
               {paymentMethod === 'qris' && (
                 <div className="space-y-3">
                   {instructions?.qris_image_url ? (
-                    <div className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark flex flex-col items-center gap-3">
+                    <div className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] flex flex-col items-center gap-3">
                       <img
                         src={instructions.qris_image_url}
                         alt="Kode QRIS Resmi Autobotz"
-                        className="w-56 h-56 object-contain border-2 border-brand-dark rounded-xl bg-white p-2"
+                        className="w-56 h-56 object-contain border border-white/[0.1] rounded-xl bg-[#121621]/65 backdrop-blur-md p-2"
                       />
-                      <p className="text-xs font-mono text-brand-dark">
+                      <p className="text-xs font-mono text-[#F4F6FA]">
                         Scan QRIS di atas sesuai nominal tagihan pesanan Anda.
                       </p>
                     </div>
                   ) : (
-                    <div className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark text-xs font-mono text-brand-dark space-y-1">
+                    <div className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] text-xs font-mono text-[#F4F6FA] space-y-1">
                       <p className="font-bold">Gambar QRIS Manual Belum Dikonfigurasi di Env Server</p>
-                      <p className="text-brand-muted">
+                      <p className="text-[#A8B0C2]">
                         Admin dapat menyetel <code>MANUAL_QRIS_IMAGE_URL</code> pada <code>.env.backend</code>. Silakan buat order lalu unggah bukti bayar di panel kanan untuk verifikasi admin.
                       </p>
                     </div>
@@ -482,7 +482,7 @@ export default function Payment() {
               )}
 
               {paymentMethod === 'midtrans' && !paymentInfo?.redirect_url && (
-                <div className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark text-xs font-mono text-brand-dark">
+                <div className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] text-xs font-mono text-[#F4F6FA]">
                   Klik tombol <strong>Buat Order Resmi</strong> di atas untuk meminta token pembayaran Snap dari server. Jika kunci <code>MIDTRANS_SERVER_KEY</code> belum aktif, silakan gunakan metode QRIS atau Transfer Bank.
                 </div>
               )}
@@ -494,16 +494,16 @@ export default function Payment() {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Order Summary & Upload Proof Card */}
-            <div className="bg-white border-2 border-brand-dark rounded-2xl p-6 space-y-5">
-              <div className="flex items-center justify-between border-b-2 border-brand-dark/15 pb-3">
-                <h2 className="font-heading font-bold text-base sm:text-lg text-brand-dark">
+            <div className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-6 space-y-5">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+                <h2 className="font-heading font-bold text-base sm:text-lg text-[#F4F6FA]">
                   3. Ringkasan Order &amp; Bukti Bayar
                 </h2>
                 {activeOrder && (
                   <button
                     type="button"
                     onClick={handleRefreshOrder}
-                    className="p-1.5 rounded-lg border-2 border-brand-dark hover:bg-brand-surface-tint text-xs font-mono inline-flex items-center gap-1"
+                    className="p-1.5 rounded-lg border border-white/[0.1] hover:bg-white/[0.05] text-xs font-mono inline-flex items-center gap-1"
                     title="Segarkan status order"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
@@ -512,39 +512,39 @@ export default function Payment() {
               </div>
 
               {activeOrder ? (
-                <div className="p-4 rounded-xl bg-brand-surface-tint border-2 border-brand-dark space-y-2.5 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] space-y-2.5 text-xs font-mono">
                   <div className="flex items-center justify-between">
-                    <span className="text-brand-muted">ORDER ID:</span>
-                    <span className="font-bold text-brand-dark">{activeOrder.id}</span>
+                    <span className="text-[#A8B0C2]">ORDER ID:</span>
+                    <span className="font-bold text-[#F4F6FA]">{activeOrder.id}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-brand-muted">PAKET:</span>
-                    <span className="font-bold text-brand-dark">{activeOrder.plan_name || activeOrder.plan_slug}</span>
+                    <span className="text-[#A8B0C2]">PAKET:</span>
+                    <span className="font-bold text-[#F4F6FA]">{activeOrder.plan_name || activeOrder.plan_slug}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-brand-muted">TOTAL TAGIHAN:</span>
+                    <span className="text-[#A8B0C2]">TOTAL TAGIHAN:</span>
                     <span className="font-extrabold text-sm text-brand-pink">
                       {formatIdr(activeOrder.amount_idr)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-brand-muted">STATUS:</span>
+                    <span className="text-[#A8B0C2]">STATUS:</span>
                     <Badge variant={statusBadgeVariant(activeOrder.payment_status)}>
                       {activeOrder.payment_status}
                     </Badge>
                   </div>
                   {activeOrder.notes && (
-                    <div className="pt-2 border-t border-brand-dark/15 text-brand-pink">
+                    <div className="pt-2 border-t border-white/[0.08] text-brand-pink">
                       Catatan: {activeOrder.notes}
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="p-5 rounded-xl border-2 border-dashed border-brand-dark bg-brand-surface-tint/30 text-center space-y-1">
-                  <p className="font-heading font-bold text-sm text-brand-dark">
+                <div className="p-5 rounded-xl border-2 border-dashed border-white/[0.12] bg-white/[0.03] text-center space-y-1">
+                  <p className="font-heading font-bold text-sm text-[#F4F6FA]">
                     Belum Ada Order Aktif yang Dipilih
                   </p>
-                  <p className="text-xs text-brand-muted font-sans">
+                  <p className="text-xs text-[#A8B0C2] font-sans">
                     Tekan tombol <strong>Buat Order Resmi</strong> di kolom kiri atau pilih salah satu pesanan Anda di bawah untuk mengunggah bukti transfer.
                   </p>
                 </div>
@@ -588,22 +588,22 @@ export default function Payment() {
                   }}
                   className={`w-full p-6 rounded-xl border-2 transition-all flex flex-col items-center justify-center gap-2 text-center ${
                     !activeOrder || activeOrder?.payment_status === 'paid'
-                      ? 'border-gray-300 bg-gray-100 cursor-not-allowed opacity-60'
+                      ? 'border-white/[0.1] bg-white/[0.06] cursor-not-allowed opacity-60'
                       : uploadingProof
-                        ? 'border-brand-dark bg-white cursor-wait'
+                        ? 'border-white/[0.12] bg-[#121621]/65 backdrop-blur-md cursor-wait'
                         : uploadError
-                          ? 'border-brand-pink bg-red-50 text-brand-pink cursor-pointer'
+                          ? 'border-brand-pink bg-[#FD1843]/10 text-brand-pink cursor-pointer'
                           : isDragging
-                            ? 'border-brand-pink bg-brand-surface-tint border-solid shadow-brutalist-pink cursor-pointer'
-                            : 'border-dashed border-brand-dark bg-brand-surface-tint/40 hover:bg-brand-surface-tint/70 cursor-pointer'
+                            ? 'border-brand-pink bg-white/[0.05] border-solid shadow-[0_0_32px_rgba(253,24,67,0.16)] cursor-pointer'
+                            : 'border-dashed border-white/[0.12] bg-white/[0.04] hover:bg-white/[0.05]/70 cursor-pointer'
                   }`}
                 >
                   {uploadingProof ? (
                     <div className="w-full space-y-2">
-                      <p className="font-mono text-xs font-bold text-brand-dark">
+                      <p className="font-mono text-xs font-bold text-[#F4F6FA]">
                         MENGUNGGAH &amp; VALIDASI MAGIC BYTES ({uploadProgress}%)
                       </p>
-                      <div className="w-full h-3 bg-gray-200 rounded-full border border-brand-dark overflow-hidden">
+                      <div className="w-full h-3 bg-white/[0.1] rounded-full border border-white/[0.12] overflow-hidden">
                         <div
                           className="h-full bg-brand-pink transition-all duration-150"
                           style={{ width: `${uploadProgress}%` }}
@@ -613,20 +613,20 @@ export default function Payment() {
                   ) : selectedFile ? (
                     <>
                       <FileCheck2 className="w-7 h-7 text-brand-mint" />
-                      <p className="font-mono text-xs font-bold text-brand-dark break-all">
+                      <p className="font-mono text-xs font-bold text-[#F4F6FA] break-all">
                         {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
                       </p>
-                      <span className="text-[11px] text-brand-muted font-sans">
+                      <span className="text-[11px] text-[#A8B0C2] font-sans">
                         Klik untuk mengganti file gambar
                       </span>
                     </>
                   ) : (
                     <>
-                      <Upload className="w-6 h-6 text-brand-dark" />
-                      <p className="font-heading font-bold text-xs sm:text-sm text-brand-dark">
+                      <Upload className="w-6 h-6 text-[#F4F6FA]" />
+                      <p className="font-heading font-bold text-xs sm:text-sm text-[#F4F6FA]">
                         Klik atau seret struk transfer ke sini
                       </p>
-                      <p className="font-mono text-[11px] text-brand-muted">
+                      <p className="font-mono text-[11px] text-[#A8B0C2]">
                         Format wajib: JPG, PNG, atau WEBP (Maks. 5MB)
                       </p>
                     </>
@@ -634,14 +634,14 @@ export default function Payment() {
                 </div>
 
                 {uploadError && (
-                  <div className="p-3 rounded-xl bg-red-50 border-2 border-brand-pink text-brand-pink text-xs font-mono font-bold flex items-start gap-2">
+                  <div className="p-3 rounded-xl bg-[#FD1843]/10 border-2 border-brand-pink text-brand-pink text-xs font-mono font-bold flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                     <span>{uploadError}</span>
                   </div>
                 )}
 
                 {uploadSuccess && (
-                  <div className="p-3 rounded-xl bg-green-50 border-2 border-brand-mint text-brand-dark text-xs font-mono font-bold flex items-start gap-2">
+                  <div className="p-3 rounded-xl bg-[#10B981]/10 border-2 border-brand-mint text-[#F4F6FA] text-xs font-mono font-bold flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-brand-mint shrink-0 mt-0.5" />
                     <span>{uploadSuccess}</span>
                   </div>
@@ -665,7 +665,7 @@ export default function Payment() {
                 </Button>
               </form>
 
-              <div className="pt-3 border-t-2 border-brand-dark/10 flex items-center gap-2 text-[11px] font-mono text-brand-muted">
+              <div className="pt-3 border-t border-white/[0.08] flex items-center gap-2 text-[11px] font-mono text-[#A8B0C2]">
                 <ShieldCheck className="w-4 h-4 text-brand-mint shrink-0" />
                 <span>File disimpan di bucket privat Supabase dengan signed URL 10 menit.</span>
               </div>
@@ -673,8 +673,8 @@ export default function Payment() {
 
             {/* Existing User Orders List */}
             {user && myOrders.length > 0 && (
-              <div className="bg-white border-2 border-brand-dark rounded-2xl p-5 space-y-3">
-                <h3 className="font-heading font-bold text-sm text-brand-dark uppercase">
+              <div className="bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] p-5 space-y-3">
+                <h3 className="font-heading font-bold text-sm text-[#F4F6FA] uppercase">
                   Riwayat Pesanan Paket Anda
                 </h3>
                 <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
@@ -690,13 +690,13 @@ export default function Payment() {
                         }}
                         className={`w-full p-3 rounded-xl border-2 text-left text-xs font-mono transition-colors flex items-center justify-between ${
                           isCurrent
-                            ? 'border-brand-dark bg-brand-surface-tint'
-                            : 'border-brand-dark/20 bg-white hover:border-brand-dark'
+                            ? 'border-white/[0.12] bg-white/[0.05]'
+                            : 'border-white/[0.1] bg-[#121621]/65 backdrop-blur-md hover:border-white/[0.12]'
                         }`}
                       >
                         <div>
-                          <p className="font-bold text-brand-dark">{ord.plan_name || ord.plan_slug}</p>
-                          <p className="text-[11px] text-brand-muted">
+                          <p className="font-bold text-[#F4F6FA]">{ord.plan_name || ord.plan_slug}</p>
+                          <p className="text-[11px] text-[#A8B0C2]">
                             {formatIdr(ord.amount_idr)} • {formatDateId(ord.created_at)}
                           </p>
                         </div>

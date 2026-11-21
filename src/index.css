@@ -10,60 +10,87 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-tg: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 @layer base {
   body {
-    @apply bg-brand-chill-white text-brand-dark font-sans leading-relaxed antialiased;
+    background-color: #090B10;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    color: #F4F6FA;
+    @apply font-sans leading-relaxed antialiased;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-tight text-brand-dark;
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    @apply tracking-tight text-[#F4F6FA];
   }
 }
 
 @layer components {
-  /* Static Card (No shadow per .deslop/recipes.md) */
+  /* Glass Tier 1 â€” Base Card */
+  .glass-card,
   .card-static {
-    @apply bg-white border-2 border-brand-dark rounded-2xl shadow-none;
+    @apply bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] text-[#F4F6FA];
   }
 
-  /* Interactive Brutalist Card */
+  /* Glass Tier 1 â€” Interactive Card */
+  .glass-card-interactive,
   .card-brutalist {
-    @apply bg-white border-2 border-brand-dark rounded-2xl shadow-brutalist transition-all duration-150;
+    @apply bg-[#121621]/55 backdrop-blur-md border border-white/[0.09] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] text-[#F4F6FA] transition-all duration-200;
   }
 
+  .glass-card-interactive:hover,
   .card-brutalist:hover {
-    @apply shadow-brutalist-hover -translate-x-0.5 -translate-y-0.5;
+    @apply bg-[#171C2B]/70 border-white/[0.18] -translate-y-0.5;
   }
 
-  /* Primary Button - 6 States */
+  /* Glass Tier 2 â€” Elevated / Featured */
+  .glass-elevated {
+    @apply bg-[#161B28]/70 backdrop-blur-xl border border-white/[0.14] rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] text-[#F4F6FA];
+  }
+
+  /* Glass Tier 3 â€” Recessed Well / Code / Input */
+  .glass-well {
+    @apply bg-[#090C12]/75 backdrop-blur-sm border border-white/[0.1] rounded-xl shadow-[inset_0_2px_6px_rgba(0,0,0,0.5)] text-[#F4F6FA];
+  }
+
+  /* Primary Glass Button - 6 States */
   .btn-primary {
-    @apply px-6 py-3 bg-brand-pink text-white font-heading font-bold border-2 border-brand-dark rounded-xl shadow-brutalist transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-brand-pink-hover hover:shadow-brutalist-hover hover:-translate-x-0.5 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-offset-2 active:shadow-none active:translate-x-1 active:translate-y-1 disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-400 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0 disabled:cursor-not-allowed cursor-pointer;
+    @apply px-6 py-3 bg-[#FD1843]/90 text-white font-heading font-bold border border-white/20 backdrop-blur-md rounded-xl shadow-[0_8px_24px_rgba(253,24,67,0.32),inset_0_1px_0_rgba(255,255,255,0.28)] transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-[#FF2E56] hover:shadow-[0_10px_28px_rgba(253,24,67,0.48)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FD1843]/70 active:scale-[0.98] active:translate-y-0 disabled:bg-white/10 disabled:text-white/35 disabled:border-white/10 disabled:shadow-none disabled:translate-y-0 disabled:cursor-not-allowed cursor-pointer;
   }
 
-  /* Secondary Button - 6 States */
+  /* Secondary Glass Button - 6 States */
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-brand-dark font-heading font-bold border-2 border-brand-dark rounded-xl shadow-brutalist transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-brand-surface-tint hover:shadow-brutalist-hover hover:-translate-x-0.5 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-dark active:shadow-none active:translate-x-1 active:translate-y-1 disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0 disabled:cursor-not-allowed cursor-pointer;
+    @apply px-6 py-3 bg-white/[0.06] text-[#F4F6FA] font-heading font-bold border border-white/[0.14] backdrop-blur-md rounded-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-white/[0.12] hover:border-white/[0.26] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 active:scale-[0.98] disabled:bg-white/[0.03] disabled:text-white/30 disabled:border-white/[0.06] disabled:translate-y-0 disabled:cursor-not-allowed cursor-pointer;
   }
 
-  /* Dark Button - 6 States */
+  /* Dark Glass Button - 6 States */
   .btn-dark {
-    @apply px-6 py-3 bg-brand-dark text-white font-heading font-bold border-2 border-brand-dark rounded-xl shadow-brutalist-pink transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-black hover:shadow-brutalist-pink-lg hover:-translate-x-0.5 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-pink active:shadow-none active:translate-x-1 active:translate-y-1 disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-400 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0 disabled:cursor-not-allowed cursor-pointer;
+    @apply px-6 py-3 bg-[#161B28]/80 text-[#F4F6FA] font-heading font-bold border border-[#FD1843]/40 backdrop-blur-md rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-150 inline-flex items-center justify-center gap-2 hover:bg-[#1E2436]/90 hover:border-[#FD1843]/75 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FD1843]/60 active:scale-[0.98] disabled:bg-white/[0.03] disabled:text-white/30 disabled:border-white/[0.06] disabled:cursor-not-allowed cursor-pointer;
   }
 
   /* Ghost Button */
   .btn-ghost {
-    @apply px-4 py-2.5 text-brand-dark font-heading font-bold border-2 border-transparent hover:border-brand-dark hover:bg-brand-surface-tint rounded-xl transition-all duration-150 inline-flex items-center justify-center gap-2 focus:outline-none focus:border-brand-dark disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
+    @apply px-4 py-2.5 text-[#A8B0C2] font-heading font-bold border border-transparent hover:text-white hover:border-white/[0.12] hover:bg-white/[0.06] rounded-xl transition-all duration-150 inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
   }
 
-  /* Brutalist Input - 6 States */
+  /* Glass Tier 3 Input - 6 States */
   .input-brutalist {
-    @apply w-full px-4 py-3 bg-white text-brand-dark font-sans text-sm rounded-xl border-2 border-brand-dark transition-all placeholder:text-gray-400 hover:border-black focus:bg-brand-surface-tint/30 focus:border-brand-dark focus:shadow-[3px_3px_0px_0px_#111217] focus:outline-none disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed;
+    @apply w-full px-4 py-3 bg-[#090C12]/75 backdrop-blur-sm text-[#F4F6FA] font-sans text-sm rounded-xl border border-white/[0.1] shadow-[inset_0_2px_6px_rgba(0,0,0,0.5)] transition-all placeholder:text-[#667085] hover:border-white/20 focus:bg-[#0D111A]/90 focus:border-[#FD1843]/75 focus:ring-2 focus:ring-[#FD1843]/25 focus:outline-none disabled:bg-white/[0.03] disabled:text-white/35 disabled:border-white/[0.06] disabled:cursor-not-allowed;
   }
 
-  /* Data Status Badge */
+  /* Glass Badge */
   .badge-sticker {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 font-mono text-xs font-bold uppercase rounded-md border-2 border-brand-dark tracking-wider;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 font-mono text-xs font-semibold uppercase rounded-md border backdrop-blur-sm tracking-wider;
   }
 
   /* Layout Container */
@@ -72,17 +99,17 @@
   }
 
   .heading-hero {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark leading-[1.08] tracking-tight;
+    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F4F6FA] leading-[1.08] tracking-tight;
   }
 
   .heading-section {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark leading-tight tracking-tight;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#F4F6FA] leading-tight tracking-tight;
   }
 }
 
 /* 3D Perspective & Authentic Telegram Canvas Utilities */
 .stage-3d {
-  perspective: 1200px;
+  perspective: 900px;
   transform-style: preserve-3d;
 }
 
@@ -92,30 +119,109 @@
   will-change: transform, opacity;
 }
 
-/* Authentic Telegram Dark Pattern Wallpaper */
+/* Pause CSS timeline animations when stage is off-screen */
+[data-play="off"] *,
+[data-play="off"] *::before,
+[data-play="off"] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Authentic Telegram Dark Doodle Wallpaper (#0E1621 + subtle 6% doodle SVG pattern) */
 .tg-wallpaper {
   background-color: #0E1621;
   background-image:
-    radial-gradient(#1E2C3A 1.25px, transparent 1.25px),
-    radial-gradient(#172330 1.25px, #0E1621 1.25px);
-  background-size: 28px 28px;
-  background-position: 0 0, 14px 14px;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%23FFFFFF' stroke-opacity='0.06' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 22l12-4-4 12-3-5-5-3z'/%3E%3Ccircle cx='76' cy='24' r='6'/%3E%3Cpath d='M73 24h6M76 21v6'/%3E%3Cpath d='M102 18l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1 2-4z'/%3E%3Crect x='22' y='66' width='16' height='12' rx='4'/%3E%3Cpath d='M25 78l-3 4v-4'/%3E%3Cpath d='M64 68c0-3 2.5-5 5.5-5s5.5 2 5.5 5v3H64v-3z'/%3E%3Crect x='61' y='71' width='17' height='11' rx='2.5'/%3E%3Cpath d='M102 68l-6 9h6l-2 7 8-10h-6l2-6z'/%3E%3Ccircle cx='46' cy='44' r='2'/%3E%3Ccircle cx='92' cy='48' r='1.5'/%3E%3Ccircle cx='14' cy='102' r='1.5'/%3E%3Cpath d='M42 102c3-4 9-4 12 0'/%3E%3Cpath d='M88 104l8-8m-6 0h6v6'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 20% 20%, rgba(56, 151, 240, 0.05), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.04), transparent 55%);
+  background-size: 120px 120px, 100% 100%, 100% 100%;
 }
 
-/* Telegram Chat Message Bubble Entry Physics */
-@keyframes tgBubblePop {
-  0% {
+/* Telegram Chat Message Bubble Entry Physics (origin at tail corner) */
+@keyframes tgBubbleIn {
+  from {
     opacity: 0;
-    transform: translate3d(0, 10px, 0) scale(0.97);
+    transform: translate3d(0, 10px, 0) scale(0.92);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
+.tg-in-bot {
+  transform-origin: bottom left;
+  animation: tgBubbleIn 260ms var(--ease-tg) both;
+}
+
+.tg-in-user {
+  transform-origin: bottom right;
+  animation: tgBubbleIn 260ms var(--ease-tg) both;
+}
+
 .tg-bubble-enter {
-  animation: tgBubblePop 240ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: tgBubbleIn 260ms var(--ease-tg) both;
+}
+
+/* Telegram Inline Button Ripple */
+@keyframes tgRipple {
+  from {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.tg-ripple-anim {
+  animation: tgRipple 450ms var(--ease-out-soft) forwards;
+}
+
+/* Telegram Callback Toast */
+@keyframes tgToastIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -6px, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.tg-toast-enter {
+  animation: tgToastIn 200ms var(--ease-out-soft) both;
+}
+
+/* Telegram Spoiler Shimmer */
+@keyframes tgSpoilerShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.tg-spoiler-shimmer {
+  animation: tgSpoilerShimmer 1.6s linear infinite;
+}
+
+/* Telegram Mic <-> Send Icon Swap */
+@keyframes tgIconSwap {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-30deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.tg-icon-swap {
+  animation: tgIconSwap 180ms var(--ease-out-soft) both;
 }
 
 /* 3D Center Modal Expand Physics for Telegram Enlarge Mode (Smooth, Stable, No Hover Wobble) */
@@ -135,7 +241,7 @@
 }
 
 .tg-modal-3d-enter {
-  animation: tgModal3DCenter 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: tgModal3DCenter 420ms var(--ease-out-soft) forwards;
   transform-style: preserve-3d;
 }
 
@@ -146,7 +252,7 @@
     opacity: 0.4;
   }
   40% {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     opacity: 1;
   }
 }
@@ -177,13 +283,492 @@
   animation: cliCursorBlink 0.9s infinite;
 }
 
+/* ==========================================================================
+   HOW IT WORKS - MOTION v3 (60fps GPU-Composited Continuous CSS Timelines)
+   ========================================================================== */
+
+/* --- STEP 01: Hand Holding Phone Payment Notification -> Success (6.0s loop) --- */
+@keyframes hiw1Phone {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) rotateY(-8deg) rotateX(6deg);
+    animation-timing-function: var(--ease-out-soft);
+  }
+  12% {
+    opacity: 1;
+    transform: translate3d(0, 0px, 8px) rotateY(-4deg) rotateX(3deg);
+    animation-timing-function: var(--ease-inout);
+  }
+  48% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 14px) rotateY(0deg) rotateX(0deg);
+    animation-timing-function: linear;
+  }
+  88% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 14px) rotateY(0deg) rotateX(0deg);
+    animation-timing-function: var(--ease-inout);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) rotateY(4deg) rotateX(4deg);
+  }
+}
+
+@keyframes hiw1Notif {
+  0%, 10% {
+    opacity: 0;
+    transform: translate3d(0, -120%, 0) scale(0.92);
+    animation-timing-function: var(--ease-spring);
+  }
+  19% {
+    opacity: 1;
+    transform: translate3d(0, 0%, 0) scale(1);
+  }
+  46% {
+    opacity: 1;
+    transform: translate3d(0, 0%, 0) scale(1);
+  }
+  52%, 100% {
+    opacity: 0;
+    transform: translate3d(0, -110%, 0) scale(0.95);
+  }
+}
+
+@keyframes hiw1PayScreen {
+  0%, 10% { opacity: 0; transform: translate3d(0, 6px, 0); }
+  16%, 45% { opacity: 1; transform: translate3d(0, 0, 0); }
+  51%, 100% { opacity: 0; transform: translate3d(0, -6px, 0); }
+}
+
+@keyframes hiw1Thumb {
+  0%, 26% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    animation-timing-function: var(--ease-inout);
+  }
+  33% {
+    transform: translate3d(-14px, -6px, 16px) rotate(-14deg) scale(0.96);
+    animation-timing-function: var(--ease-out-soft);
+  }
+  41%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes hiw1BtnTap {
+  0%, 31% { transform: scale(1); }
+  34% { transform: scale(0.93); }
+  38%, 100% { transform: scale(1); }
+}
+
+@keyframes hiw1TapRipple {
+  0%, 31% { opacity: 0; transform: scale(0); }
+  33% { opacity: 0.45; transform: scale(0.35); }
+  41% { opacity: 0; transform: scale(2.4); }
+  42%, 100% { opacity: 0; transform: scale(2.4); }
+}
+
+@keyframes hiw1PayProgress {
+  0%, 33% { transform: scaleX(0); opacity: 0; }
+  35% { transform: scaleX(0.08); opacity: 1; animation-timing-function: linear; }
+  47% { transform: scaleX(1); opacity: 1; }
+  51%, 100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes hiw1SuccessScreen {
+  0%, 48% { opacity: 0; transform: translate3d(0, 8px, 0) scale(0.94); }
+  55%, 88% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -4px, 0) scale(0.96); }
+}
+
+@keyframes hiw1CheckPop {
+  0%, 49% { opacity: 0; transform: scale(0.4); animation-timing-function: var(--ease-spring); }
+  58% { opacity: 1; transform: scale(1.14); animation-timing-function: var(--ease-out-soft); }
+  63%, 88% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.88); }
+}
+
+@keyframes hiw1SuccessRing {
+  0%, 50% { opacity: 0; transform: scale(0.75); }
+  58% { opacity: 0.6; transform: scale(1.25); }
+  70%, 100% { opacity: 0; transform: scale(1.55); }
+}
+
+@keyframes hiw1SuccessGlow {
+  0%, 48% { opacity: 0; }
+  56%, 88% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes hiw1Cap1 {
+  0% { transform: scaleX(0); opacity: 1; }
+  30%, 88% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw1Cap2 {
+  0%, 29% { transform: scaleX(0); opacity: 1; }
+  50%, 88% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw1Cap3 {
+  0%, 49% { transform: scaleX(0); opacity: 1; }
+  66%, 88% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+.hiw1-phone { animation: hiw1Phone 6s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw1-notif { animation: hiw1Notif 6s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw1-pay-screen { animation: hiw1PayScreen 6s infinite var(--hiw-delay, 0ms) both; }
+.hiw1-thumb { animation: hiw1Thumb 6s infinite var(--hiw-delay, 0ms) both; will-change: transform; }
+.hiw1-btn-tap { animation: hiw1BtnTap 6s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw1-tap-ripple { animation: hiw1TapRipple 6s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw1-pay-progress { transform-origin: left; animation: hiw1PayProgress 6s infinite var(--hiw-delay, 0ms) both; }
+.hiw1-success-screen { animation: hiw1SuccessScreen 6s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw1-check-pop { animation: hiw1CheckPop 6s infinite var(--hiw-delay, 0ms) both; }
+.hiw1-success-ring { animation: hiw1SuccessRing 6s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw1-success-glow { animation: hiw1SuccessGlow 6s infinite var(--hiw-delay, 0ms) both; }
+.hiw1-cap-1 { transform-origin: left; animation: hiw1Cap1 6s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw1-cap-2 { transform-origin: left; animation: hiw1Cap2 6s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw1-cap-3 { transform-origin: left; animation: hiw1Cap3 6s linear infinite var(--hiw-delay, 0ms) both; }
+
+/* --- STEP 02: Token Handshake Pipeline (6.5s loop) --- */
+@keyframes hiw2Line1 {
+  0%, 12% { transform: scaleX(0); opacity: 1; animation-timing-function: var(--ease-inout); }
+  35%, 92% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes hiw2Line2 {
+  0%, 52% { transform: scaleX(0); opacity: 1; animation-timing-function: var(--ease-inout); }
+  70%, 92% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes hiw2Capsule {
+  0% { opacity: 0; transform: translate3d(-34%, 0, 0) scale(0.9); animation-timing-function: var(--ease-out-soft); }
+  10% { opacity: 1; transform: translate3d(-24%, 0, 12px) scale(1); animation-timing-function: var(--ease-inout); }
+  14% { opacity: 1; transform: translate3d(-24%, 0, 12px) scale(1); animation-timing-function: var(--ease-inout); }
+  35% { opacity: 1; transform: translate3d(0%, 0, 22px) scale(1.03); }
+  52% { opacity: 1; transform: translate3d(0%, 0, 22px) scale(1.03); animation-timing-function: var(--ease-inout); }
+  70% { opacity: 1; transform: translate3d(24%, 0, 14px) scale(1); }
+  92% { opacity: 1; transform: translate3d(24%, 0, 14px) scale(1); }
+  100% { opacity: 0; transform: translate3d(34%, 0, 0) scale(0.92); }
+}
+
+@keyframes hiw2Shield {
+  0%, 34% { transform: rotateY(0deg) scale(1); }
+  43% { transform: rotateY(180deg) scale(1.12); }
+  52%, 92% { transform: rotateY(360deg) scale(1); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+
+@keyframes hiw2RawText {
+  0% { opacity: 0; }
+  8%, 36% { opacity: 1; }
+  43%, 100% { opacity: 0; }
+}
+
+@keyframes hiw2MidText {
+  0%, 35% { opacity: 0; }
+  40%, 47% { opacity: 1; }
+  52%, 100% { opacity: 0; }
+}
+
+@keyframes hiw2EncText {
+  0%, 47% { opacity: 0; }
+  53%, 92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes hiw2Badge200 {
+  0%, 66% { opacity: 0; transform: scale(0.65); animation-timing-function: var(--ease-spring); }
+  74% { opacity: 1; transform: scale(1.08); }
+  79%, 92% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.95); }
+}
+
+@keyframes hiw2Pulse {
+  0%, 67% { opacity: 0; transform: scale(0.9); }
+  73% { opacity: 0.65; transform: scale(1.22); }
+  84%, 100% { opacity: 0; transform: scale(1.45); }
+}
+
+@keyframes hiw2FooterOk {
+  0%, 68% { opacity: 0; transform: translate3d(0, 4px, 0); }
+  75%, 92% { opacity: 1; transform: translate3d(0, 0, 0); }
+  100% { opacity: 0; transform: translate3d(0, -3px, 0); }
+}
+
+@keyframes hiw2Cap1 {
+  0% { transform: scaleX(0); opacity: 1; }
+  35%, 92% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw2Cap2 {
+  0%, 34% { transform: scaleX(0); opacity: 1; }
+  70%, 92% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw2Cap3 {
+  0%, 69% { transform: scaleX(0); opacity: 1; }
+  80%, 92% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+.hiw2-line-1 { transform-origin: left; animation: hiw2Line1 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-line-2 { transform-origin: left; animation: hiw2Line2 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-capsule { animation: hiw2Capsule 6.5s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw2-shield { animation: hiw2Shield 6.5s var(--ease-inout) infinite var(--hiw-delay, 0ms) both; will-change: transform; }
+.hiw2-raw-text { animation: hiw2RawText 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-mid-text { animation: hiw2MidText 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-enc-text { animation: hiw2EncText 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-badge-200 { animation: hiw2Badge200 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-pulse { animation: hiw2Pulse 6.5s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw2-footer-ok { animation: hiw2FooterOk 6.5s infinite var(--hiw-delay, 0ms) both; }
+.hiw2-cap-1 { transform-origin: left; animation: hiw2Cap1 6.5s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw2-cap-2 { transform-origin: left; animation: hiw2Cap2 6.5s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw2-cap-3 { transform-origin: left; animation: hiw2Cap3 6.5s linear infinite var(--hiw-delay, 0ms) both; }
+
+/* --- STEP 03: Brankas Stok Isometric Scanner (6.0s loop) --- */
+@keyframes hiw3Scanner {
+  0% { opacity: 0; transform: translate3d(0, 0px, 24px); }
+  5% { opacity: 1; transform: translate3d(0, 4px, 24px); animation-timing-function: linear; }
+  58% { opacity: 1; transform: translate3d(0, 92px, 24px); }
+  64%, 100% { opacity: 0; transform: translate3d(0, 98px, 24px); }
+}
+
+@keyframes hiw3RowLift {
+  0%, 10% { transform: translate3d(0, 0, 0px) scale(1); }
+  18% { transform: translate3d(0, 0, 16px) scale(1.02); }
+  28%, 100% { transform: translate3d(0, 0, 0px) scale(1); }
+}
+
+@keyframes hiw3RowGlow {
+  0%, 12% { opacity: 0; }
+  18%, 90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes hiw3LockPop {
+  0%, 12% { opacity: 0; transform: scale(0); animation-timing-function: var(--ease-spring); }
+  20% { opacity: 1; transform: scale(1.18); }
+  25%, 90% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes hiw3Cap1 {
+  0% { transform: scaleX(0); opacity: 1; }
+  25%, 90% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw3Cap2 {
+  0%, 24% { transform: scaleX(0); opacity: 1; }
+  60%, 90% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw3Cap3 {
+  0%, 59% { transform: scaleX(0); opacity: 1; }
+  75%, 90% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+.hiw3-scanner { animation: hiw3Scanner 6s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw3-row-0 { animation: hiw3RowLift 6s var(--ease-out-soft) infinite calc(var(--hiw-delay, 0ms) + 0ms) both; will-change: transform; }
+.hiw3-row-1 { animation: hiw3RowLift 6s var(--ease-out-soft) infinite calc(var(--hiw-delay, 0ms) + 900ms) both; will-change: transform; }
+.hiw3-row-2 { animation: hiw3RowLift 6s var(--ease-out-soft) infinite calc(var(--hiw-delay, 0ms) + 1800ms) both; will-change: transform; }
+.hiw3-glow-0 { animation: hiw3RowGlow 6s infinite calc(var(--hiw-delay, 0ms) + 0ms) both; }
+.hiw3-glow-1 { animation: hiw3RowGlow 6s infinite calc(var(--hiw-delay, 0ms) + 900ms) both; }
+.hiw3-glow-2 { animation: hiw3RowGlow 6s infinite calc(var(--hiw-delay, 0ms) + 1800ms) both; }
+.hiw3-lock-0 { animation: hiw3LockPop 6s infinite calc(var(--hiw-delay, 0ms) + 0ms) both; }
+.hiw3-lock-1 { animation: hiw3LockPop 6s infinite calc(var(--hiw-delay, 0ms) + 900ms) both; }
+.hiw3-lock-2 { animation: hiw3LockPop 6s infinite calc(var(--hiw-delay, 0ms) + 1800ms) both; }
+.hiw3-cap-1 { transform-origin: left; animation: hiw3Cap1 6s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw3-cap-2 { transform-origin: left; animation: hiw3Cap2 6s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw3-cap-3 { transform-origin: left; animation: hiw3Cap3 6s linear infinite var(--hiw-delay, 0ms) both; }
+
+/* --- STEP 04: Authentic Mini Telegram Auto-Fulfillment (9.0s loop) --- */
+@keyframes hiw4StatusBot {
+  0%, 9% { opacity: 1; transform: translate3d(0, 0, 0); }
+  11%, 19% { opacity: 0; transform: translate3d(0, -4px, 0); }
+  21%, 41% { opacity: 1; transform: translate3d(0, 0, 0); }
+  43%, 47% { opacity: 0; transform: translate3d(0, -4px, 0); }
+  49%, 100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes hiw4StatusTyping {
+  0%, 9% { opacity: 0; transform: translate3d(0, 4px, 0); }
+  11%, 19% { opacity: 1; transform: translate3d(0, 0, 0); }
+  21%, 41% { opacity: 0; transform: translate3d(0, -4px, 0); }
+  43%, 47% { opacity: 1; transform: translate3d(0, 0, 0); }
+  49%, 100% { opacity: 0; transform: translate3d(0, -4px, 0); }
+}
+
+@keyframes hiw4Msg1Wrap {
+  0% { grid-template-rows: 0fr; }
+  4%, 100% { grid-template-rows: 1fr; }
+}
+@keyframes hiw4Msg1 {
+  0% { opacity: 0; transform: translate3d(8px, 8px, 0) scale(0.92); animation-timing-function: var(--ease-tg); }
+  4%, 93% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -8px, 0) scale(0.98); }
+}
+@keyframes hiw4TickSingle {
+  0%, 6% { opacity: 1; }
+  8%, 100% { opacity: 0; }
+}
+@keyframes hiw4TickDouble {
+  0%, 6% { opacity: 0; }
+  8%, 100% { opacity: 1; }
+}
+
+@keyframes hiw4Msg2Wrap {
+  0%, 19% { grid-template-rows: 0fr; }
+  23%, 100% { grid-template-rows: 1fr; }
+}
+@keyframes hiw4Msg2 {
+  0%, 19% { opacity: 0; transform: translate3d(-8px, 8px, 0) scale(0.92); animation-timing-function: var(--ease-tg); }
+  23%, 93% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -8px, 0) scale(0.98); }
+}
+@keyframes hiw4BtnPress {
+  0%, 34% { transform: scale(1); }
+  36% { transform: scale(0.96); }
+  39%, 100% { transform: scale(1); }
+}
+@keyframes hiw4BtnRipple {
+  0%, 34% { opacity: 0; transform: scale(0); }
+  35.5% { opacity: 0.35; transform: scale(0.4); }
+  41% { opacity: 0; transform: scale(2.6); }
+  42%, 100% { opacity: 0; transform: scale(2.6); }
+}
+
+@keyframes hiw4PillWrap {
+  0%, 40% { grid-template-rows: 0fr; }
+  44%, 100% { grid-template-rows: 1fr; }
+}
+@keyframes hiw4Pill {
+  0%, 40% { opacity: 0; transform: scale(0.94); }
+  44%, 93% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -8px, 0) scale(0.96); }
+}
+
+@keyframes hiw4Msg3Wrap {
+  0%, 47% { grid-template-rows: 0fr; }
+  51%, 100% { grid-template-rows: 1fr; }
+}
+@keyframes hiw4Msg3 {
+  0%, 47% { opacity: 0; transform: translate3d(-8px, 8px, 0) scale(0.92); animation-timing-function: var(--ease-tg); }
+  51%, 93% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -8px, 0) scale(0.98); }
+}
+@keyframes hiw4Spoiler {
+  0%, 58% { filter: blur(5px); }
+  64%, 100% { filter: blur(0px); }
+}
+@keyframes hiw4SpoilerMask {
+  0%, 58% { opacity: 0.9; }
+  64%, 100% { opacity: 0; }
+}
+
+@keyframes hiw4Cap1 {
+  0% { transform: scaleX(0); opacity: 1; }
+  41%, 93% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw4Cap2 {
+  0%, 40% { transform: scaleX(0); opacity: 1; }
+  52%, 93% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes hiw4Cap3 {
+  0%, 51% { transform: scaleX(0); opacity: 1; }
+  65%, 93% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+.hiw4-status-bot { animation: hiw4StatusBot 9s infinite var(--hiw-delay, 0ms) both; }
+.hiw4-status-typing { animation: hiw4StatusTyping 9s infinite var(--hiw-delay, 0ms) both; }
+.hiw4-msg1-wrap { display: grid; animation: hiw4Msg1Wrap 9s var(--ease-tg) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-msg1 { transform-origin: bottom right; animation: hiw4Msg1 9s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw4-tick-single { animation: hiw4TickSingle 9s infinite var(--hiw-delay, 0ms) both; }
+.hiw4-tick-double { animation: hiw4TickDouble 9s infinite var(--hiw-delay, 0ms) both; }
+.hiw4-msg2-wrap { display: grid; animation: hiw4Msg2Wrap 9s var(--ease-tg) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-msg2 { transform-origin: bottom left; animation: hiw4Msg2 9s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw4-btn-press { animation: hiw4BtnPress 9s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-btn-ripple { animation: hiw4BtnRipple 9s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-pill-wrap { display: grid; animation: hiw4PillWrap 9s var(--ease-tg) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-pill { animation: hiw4Pill 9s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-msg3-wrap { display: grid; animation: hiw4Msg3Wrap 9s var(--ease-tg) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-msg3 { transform-origin: bottom left; animation: hiw4Msg3 9s infinite var(--hiw-delay, 0ms) both; will-change: transform, opacity; }
+.hiw4-spoiler { animation: hiw4Spoiler 9s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-spoiler-mask { animation: hiw4SpoilerMask 9s var(--ease-out-soft) infinite var(--hiw-delay, 0ms) both; }
+.hiw4-cap-1 { transform-origin: left; animation: hiw4Cap1 9s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw4-cap-2 { transform-origin: left; animation: hiw4Cap2 9s linear infinite var(--hiw-delay, 0ms) both; }
+.hiw4-cap-3 { transform-origin: left; animation: hiw4Cap3 9s linear infinite var(--hiw-delay, 0ms) both; }
+
+/* Reduced Motion: disable loops and show final static result frame */
 @media (prefers-reduced-motion: reduce) {
   .preserve-3d,
   .tg-bubble-enter,
-  .tg-modal-3d-enter {
+  .tg-in-bot,
+  .tg-in-user,
+  .tg-modal-3d-enter,
+  .tg-ripple-anim,
+  .tg-toast-enter,
+  .tg-spoiler-shimmer,
+  .tg-icon-swap,
+  [class*="hiw"] {
     animation: none !important;
     transition: none !important;
+  }
+
+  .hiw1-phone,
+  .hiw1-success-screen,
+  .hiw1-check-pop,
+  .hiw1-success-glow,
+  .hiw2-line-1,
+  .hiw2-line-2,
+  .hiw2-capsule,
+  .hiw2-enc-text,
+  .hiw2-badge-200,
+  .hiw2-footer-ok,
+  .hiw3-glow-0,
+  .hiw3-glow-1,
+  .hiw3-glow-2,
+  .hiw3-lock-0,
+  .hiw3-lock-1,
+  .hiw3-lock-2,
+  .hiw4-status-bot,
+  .hiw4-msg1,
+  .hiw4-tick-double,
+  .hiw4-msg2,
+  .hiw4-pill,
+  .hiw4-msg3 {
+    opacity: 1 !important;
     transform: none !important;
+  }
+
+  .hiw4-msg1-wrap,
+  .hiw4-msg2-wrap,
+  .hiw4-pill-wrap,
+  .hiw4-msg3-wrap {
+    grid-template-rows: 1fr !important;
+  }
+
+  .hiw4-spoiler {
+    filter: none !important;
+  }
+
+  .hiw1-notif,
+  .hiw1-pay-screen,
+  .hiw1-pay-progress,
+  .hiw2-raw-text,
+  .hiw2-mid-text,
+  .hiw3-scanner,
+  .hiw4-status-typing,
+  .hiw4-tick-single,
+  .hiw4-spoiler-mask {
+    opacity: 0 !important;
   }
 }
 
@@ -192,9 +777,354 @@
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFF0F3;
+  background: #090B10;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FD1843;
-  border: 2px solid #111217;
+  background: rgba(253, 24, 67, 0.6);
+  border-radius: 999px;
+  border: 2px solid #090B10;
+}
+
+/* === FLUXCODE FLIGHT SCROLL-ZOOM HERO === */
+.fh {
+  position: relative;
+  background-color: #090b10;
+}
+
+.fh-stage {
+  position: relative;
+}
+
+/* Warm Sunrise Orange Horizon Sky */
+.fh-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #111328 0%,
+    #251b3a 18%,
+    #5f2946 36%,
+    #b8473f 54%,
+    #f27d3b 70%,
+    #ffad5c 82%,
+    #4c2331 94%,
+    #090b10 100%
+  );
+}
+
+/* Radiant Rising Sun Glow Behind Horizon */
+.fh-sunrise-orb {
+  position: absolute;
+  left: 50%;
+  top: 64%;
+  width: min(920px, 115vw);
+  height: min(560px, 68vh);
+  transform: translate3d(-50%, calc(-50% + var(--z, 0) * -5svh), 0) scale(calc(1 + var(--z, 0) * 0.18));
+  background: radial-gradient(
+    ellipse 55% 50% at 50% 50%,
+    rgba(255, 232, 168, 0.85) 0%,
+    rgba(255, 164, 84, 0.55) 28%,
+    rgba(242, 108, 60, 0.25) 55%,
+    transparent 76%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+@keyframes cloudDriftSlow {
+  0% { background-position-x: 0px; }
+  100% { background-position-x: 1200px; }
+}
+
+.fh-cloud {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  pointer-events: none;
+  background-repeat: repeat-x;
+  will-change: transform, opacity;
+}
+
+.fh-cloud-far {
+  top: 12%;
+  height: 260px;
+  opacity: calc(0.76 - var(--cc, 0) * 0.14);
+  background-size: 1200px 260px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='260' viewBox='0 0 1200 260'%3E%3Cdefs%3E%3ClinearGradient id='cfTop' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.88'/%3E%3Cstop offset='0.52' stop-color='%23F79654' stop-opacity='0.58'/%3E%3Cstop offset='1' stop-color='%235C2640' stop-opacity='0.06'/%3E%3C/linearGradient%3E%3ClinearGradient id='cfBack' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFD3A6' stop-opacity='0.65'/%3E%3Cstop offset='1' stop-color='%234C2038' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 220 C40 160 110 140 175 162 C215 98 310 86 380 126 C440 72 555 78 615 130 C680 84 785 92 845 140 C915 94 1020 104 1085 152 C1135 130 1175 148 1200 220 Z' fill='url(%23cfBack)'/%3E%3Cpath d='M0 245 C50 182 135 162 210 185 C265 112 375 102 448 148 C515 96 635 104 702 156 C768 110 882 118 948 168 C1015 128 1120 140 1200 245 Z' fill='url(%23cfTop)'/%3E%3C/svg%3E");
+  filter: blur(4px);
+  transform: translate3d(calc(var(--p, 0) * -8vw), calc(var(--p, 0) * 4svh), 0);
+  animation: cloudDriftSlow 90s linear infinite;
+}
+
+.fh-cloud-mid {
+  top: 34%;
+  height: 300px;
+  opacity: calc(0.86 - var(--cc, 0) * 0.24);
+  background-size: 1200px 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='0 0 1200 300'%3E%3Cdefs%3E%3ClinearGradient id='cmLit' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.92'/%3E%3Cstop offset='0.48' stop-color='%23F79654' stop-opacity='0.64'/%3E%3Cstop offset='1' stop-color='%235C2640' stop-opacity='0.08'/%3E%3C/linearGradient%3E%3ClinearGradient id='cmDepth' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFE0BA' stop-opacity='0.78'/%3E%3Cstop offset='0.65' stop-color='%23C95B49' stop-opacity='0.36'/%3E%3Cstop offset='1' stop-color='%23331528' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx='160' cy='190' rx='170' ry='78' fill='url(%23cmDepth)'/%3E%3Cellipse cx='490' cy='175' rx='210' ry='92' fill='url(%23cmDepth)'/%3E%3Cellipse cx='860' cy='182' rx='220' ry='88' fill='url(%23cmDepth)'/%3E%3Cpath d='M0 265 C60 190 140 168 215 194 C265 118 375 110 440 162 C505 88 640 94 705 162 C770 108 890 116 955 174 C1030 132 1135 150 1200 265 Z' fill='url(%23cmLit)'/%3E%3C/svg%3E");
+  filter: blur(3px);
+  transform: translate3d(calc(var(--p, 0) * 6vw), calc(var(--z, 0) * -8svh), 0) scale(calc(1 + var(--z, 0) * 0.16));
+  animation: cloudDriftSlow 62s linear infinite reverse;
+}
+
+/* Sculpted 2-Way Parting Foreground Cumulus Curtains: Shroud Distant Robot at p=0, Split Cleanly LEFT & RIGHT on Scroll */
+.fh-cloud-veil-l {
+  top: 12%;
+  left: -16%;
+  width: 78vw;
+  height: 70vh;
+  opacity: calc(0.95 - var(--cc, 0) * 0.72);
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'%3E%3Cdefs%3E%3CradialGradient id='cvlPuff' cx='48%25' cy='40%25' r='55%25'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.96'/%3E%3Cstop offset='0.48' stop-color='%23F79654' stop-opacity='0.72'/%3E%3Cstop offset='0.82' stop-color='%235C2640' stop-opacity='0.32'/%3E%3Cstop offset='1' stop-color='%2324121E' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse cx='330' cy='290' rx='260' ry='145' fill='url(%23cvlPuff)'/%3E%3Cellipse cx='520' cy='260' rx='270' ry='165' fill='url(%23cvlPuff)'/%3E%3Cellipse cx='420' cy='180' rx='215' ry='135' fill='url(%23cvlPuff)'/%3E%3Cellipse cx='620' cy='320' rx='220' ry='125' fill='url(%23cvlPuff)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  filter: blur(9px);
+  transform: translate3d(calc(var(--cc, 0) * -52vw), calc(var(--cc, 0) * -4svh), 0) scale(calc(1 + var(--cc, 0) * 0.16));
+}
+
+.fh-cloud-veil-r {
+  top: 14%;
+  left: auto;
+  right: -16%;
+  width: 78vw;
+  height: 70vh;
+  opacity: calc(0.95 - var(--cc, 0) * 0.72);
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'%3E%3Cdefs%3E%3CradialGradient id='cvrPuff' cx='52%25' cy='40%25' r='55%25'%3E%3Cstop offset='0' stop-color='%23FFF0DC' stop-opacity='0.96'/%3E%3Cstop offset='0.48' stop-color='%23F79654' stop-opacity='0.70'/%3E%3Cstop offset='0.82' stop-color='%235C2640' stop-opacity='0.30'/%3E%3Cstop offset='1' stop-color='%2324121E' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse cx='570' cy='290' rx='260' ry='145' fill='url(%23cvrPuff)'/%3E%3Cellipse cx='380' cy='260' rx='270' ry='165' fill='url(%23cvrPuff)'/%3E%3Cellipse cx='480' cy='180' rx='215' ry='135' fill='url(%23cvrPuff)'/%3E%3Cellipse cx='280' cy='320' rx='220' ry='125' fill='url(%23cvrPuff)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  filter: blur(9px);
+  transform: translate3d(calc(var(--cc, 0) * 52vw), calc(var(--cc, 0) * -4svh), 0) scale(calc(1 + var(--cc, 0) * 0.16));
+}
+
+.fh-cloud-near {
+  bottom: -4%;
+  height: 230px;
+  opacity: calc(0.84 - var(--cc, 0) * 0.34);
+  background-size: 1200px 230px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='230' viewBox='0 0 1200 230'%3E%3Cdefs%3E%3ClinearGradient id='cn' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFD9B3' stop-opacity='0.52'/%3E%3Cstop offset='0.45' stop-color='%23B44B48' stop-opacity='0.65'/%3E%3Cstop offset='1' stop-color='%23090B10' stop-opacity='0.96'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 230 L0 135 C75 82 180 72 260 112 C340 48 485 52 575 110 C665 56 805 62 895 115 C985 78 1110 88 1200 135 L1200 230 Z' fill='url(%23cn)'/%3E%3C/svg%3E");
+  filter: blur(5px);
+  transform: translate3d(0, calc((1 - var(--z, 0)) * 8svh), 0);
+}
+
+/* Swirling Soft Volumetric Cloud Mist Behind Beat 3 Arsitektur & Keamanan UI */
+.fh-spotlight-clouds {
+  position: absolute;
+  inset: -8%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: var(--sp, 0);
+  background:
+    radial-gradient(ellipse 68% 46% at 22% 72%, rgba(255, 168, 102, 0.38), transparent 68%),
+    radial-gradient(ellipse 64% 48% at 78% 66%, rgba(253, 24, 67, 0.28), transparent 66%),
+    radial-gradient(ellipse 84% 58% at 50% 88%, rgba(255, 224, 184, 0.26), rgba(9, 11, 16, 0.84) 72%),
+    linear-gradient(180deg, rgba(9, 11, 16, 0.48) 0%, rgba(18, 15, 28, 0.68) 65%, rgba(9, 11, 16, 0.96) 100%);
+  transform: translate3d(0, calc((1 - var(--sp, 0)) * 8svh), 0);
+  will-change: transform, opacity;
+}
+
+.fh-spotlight-clouds::before,
+.fh-spotlight-clouds::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  pointer-events: none;
+  background-repeat: repeat-x;
+}
+
+.fh-spotlight-clouds::before {
+  bottom: 4%;
+  height: 300px;
+  opacity: 0.42;
+  background-size: 1200px 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='0 0 1200 300'%3E%3Cdefs%3E%3ClinearGradient id='sc1' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFE4C4' stop-opacity='0.65'/%3E%3Cstop offset='0.55' stop-color='%23F79654' stop-opacity='0.34'/%3E%3Cstop offset='1' stop-color='%23090B10' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 280 C70 190 175 162 275 198 C355 110 495 104 590 175 C675 102 820 112 910 182 C1000 132 1120 148 1200 280 Z' fill='url(%23sc1)'/%3E%3C/svg%3E");
+  filter: blur(6px);
+  animation: cloudDriftSlow 65s linear infinite;
+}
+
+.fh-spotlight-clouds::after {
+  top: 14%;
+  height: 240px;
+  opacity: 0.32;
+  background-size: 1200px 240px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='240' viewBox='0 0 1200 240'%3E%3Cdefs%3E%3ClinearGradient id='sc2' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFBE88' stop-opacity='0.52'/%3E%3Cstop offset='0.6' stop-color='%238B3A52' stop-opacity='0.22'/%3E%3Cstop offset='1' stop-color='%23090B10' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 220 C85 135 200 115 305 152 C400 72 545 78 635 142 C725 84 870 92 965 152 C1055 112 1140 125 1200 220 Z' fill='url(%23sc2)'/%3E%3C/svg%3E");
+  filter: blur(8px);
+  animation: cloudDriftSlow 46s linear infinite reverse;
+}
+
+/* Seated Robot Physical Weight + Top-Edge Contact Shadow on "Sewa Bot Cloud" Button */
+.fh-seat-btn-wrap {
+  transform: translate3d(0, calc(var(--sit, 0) * 2px), 0);
+  will-change: transform;
+}
+
+.fh-seat-shadow {
+  position: absolute;
+  top: 1px;
+  left: 9px;
+  width: 36px;
+  height: 8px;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: var(--sit, 0);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(6, 8, 14, 0.78) 0%,
+    rgba(6, 8, 14, 0.32) 56%,
+    transparent 100%
+  );
+  filter: blur(1.5px);
+}
+
+/* Greeting Pill while Robot Waves */
+.fh-hi-pill {
+  position: absolute;
+  left: 50%;
+  bottom: 9svh;
+  z-index: 6;
+  transform: translate3d(-50%, calc((1 - var(--hi, 0)) * 18px), 0);
+  opacity: var(--hi, 0);
+  will-change: transform, opacity;
+}
+
+.fh.on {
+  height: 410svh;
+}
+
+.fh.on .fh-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.fh.on .fh-scene {
+  inset: -4%;
+  transform: translate3d(0, calc(var(--p, 0) * -4svh), 0) scale(calc(1.02 + var(--z, 0) * 0.05 + var(--p, 0) * 0.03));
+  will-change: transform;
+}
+
+.fh.on .fh-mask {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+#fh-dim {
+  fill: rgba(9, 11, 16, 0.88);
+}
+
+#fh-text,
+#fh-edge {
+  font-family: "Outfit", "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+#fh-edge {
+  fill: url(#fh-sheen);
+  stroke: none;
+}
+
+.fh.on .fh-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--it, 58svh) 20px 0;
+  text-align: center;
+  opacity: var(--io, 1);
+  transform: translate3d(0, var(--iy, 0px), 0);
+  will-change: transform, opacity;
+}
+
+.fh-tag {
+  margin: 0 0 20px;
+  font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.05rem, 0.65rem + 1.25vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.65);
+}
+
+.fh-hint {
+  display: block;
+  margin: clamp(16px, 2.8svh, 30px) 0 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #ffd0a1;
+}
+
+.fh-hint::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 32px;
+  margin: 10px auto 0;
+  background: linear-gradient(#ff9e4f, transparent);
+  transform-origin: top;
+  animation: fhDrip 1.8s ease-in-out infinite;
+}
+
+@keyframes fhDrip {
+  0% { transform: scaleY(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+.fh.on .fh-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: var(--co, 0);
+  transform: translate3d(0, var(--cy, 44px), 0) scale(var(--cs, 0.95));
+  filter: blur(var(--cb, 0px));
+  will-change: transform, opacity, filter;
+}
+
+.fh.on .fh-strip-glass {
+  opacity: var(--so, 0);
+  transform: translate3d(0, var(--sy, 26px), 0);
+  will-change: transform, opacity;
+}
+
+/* Beat 3 Special Floating Glassmorphism Showcase UI */
+.fh.on .fh-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: var(--sp, 0);
+  transform: translate3d(0, var(--spy, 56px), 0) scale(var(--sps, 0.9));
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fh-hint::after,
+  .fh-cloud-far,
+  .fh-cloud-mid,
+  .fh-spotlight-clouds::before,
+  .fh-spotlight-clouds::after {
+    animation: none !important;
+  }
 }
